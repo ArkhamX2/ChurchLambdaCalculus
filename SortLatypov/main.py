@@ -7,11 +7,12 @@ def readFile(filename):
     fileHandle.close()
     return file
 
-def writeResultToFile(fileName, timeScore, sortedArray):
-    with open(fileName, 'w', encoding='utf-8') as resultFile:
-        resultFile.write('Sorted in ' + str(timeScore) + ' seconds')
+def writeResultToFile(fileName, timeScore, sortedArray, needList, writeMode):
+    with open(fileName, writeMode, encoding='utf-8') as resultFile:
+        resultFile.write('Sorted ' + str(len(sortedArray))+ ' elements in ' + str(timeScore) + ' seconds')
         resultFile.write('\n\n')
-        resultFile.write(' '.join([str(i) for i in sortedArray]))
+        if(needList):
+            resultFile.write(' '.join([str(i) for i in sortedArray]))
 
 def QuickSort(unsortedList):
     if len(unsortedList) <= 1:
@@ -29,9 +30,15 @@ filename = os.path.join(fileDirectory, r'input.txt')
 start = time.perf_counter()
 try:
     array = list(map(int,readFile(filename).split(' ')))
-    answer = QuickSort(array)
+    answer = QuickSort(array.copy())
     end = time.perf_counter()
-    writeResultToFile('result.txt', end - start, answer)
+    writeResultToFile('result.txt', end - start, answer,False, 'w')
+
+    for i in range(2,16):
+        start = time.perf_counter()
+        answer = QuickSort(array.copy()*i)
+        end = time.perf_counter()
+        writeResultToFile('result.txt',end-start, answer,False, 'a')
 except:
     end = time.perf_counter()
     print("Файл содержит недопустимые символы")
