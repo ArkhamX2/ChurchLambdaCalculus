@@ -24,12 +24,17 @@ def QuickSort(unsortedList):
     return QuickSort(left) + center + QuickSort(right)
 
 fileDirectory = os.path.abspath(os.path.dirname("input.txt"))
-
 filename = os.path.join(fileDirectory, r'input.txt')
 
 start = time.perf_counter()
-array = list(map(int,readFile(filename).split(' ')))
-print (len(array))
-answer = QuickSort(array)
-end = time.perf_counter()
-writeResultToFile('result.txt',end-start,answer)
+try:
+    array = list(map(int,readFile(filename).split(' ')))
+    answer = QuickSort(array)
+    end = time.perf_counter()
+    writeResultToFile('result.txt', end - start, answer)
+except:
+    end = time.perf_counter()
+    print("Файл содержит недопустимые символы")
+    writeResultToFile('result.txt', 0, [])
+
+
