@@ -68,17 +68,19 @@ def fight(heroes: [Hero]):
         print("_____________________________________________")
         for hero in heroes:
             if hero.health > 0:
-                opponent = heroes[random.randint(0, len(heroes) - 1)]
-                if opponent.health > 0 and hero.name!=opponent.name:
-                    if hero.Attack(opponent.armor.defenceClass):
-                        heroDamage = hero.DealDamage()
-                        opponent.Health -= heroDamage
-                        print(f"{hero.name}{hero.health} атакует {opponent.name}{opponent.health} и наносит {heroDamage} единиц урона")
-                    else:
-                        print(f"{hero.name}{hero.health} промахивается по {opponent.name}{opponent.health}")
+                for opponent in heroes:
+                    if opponent.health > 0 and hero!=opponent:
+                        if hero.Attack(opponent.armor.defenceClass):
+                            heroDamage = hero.DealDamage()
+                            opponent.Health -= heroDamage
+                            print(f"{hero.name}{hero.health} атакует {opponent.name}{opponent.health} и наносит {heroDamage} единиц урона")
+                        else:
+                            print(f"{hero.name}{hero.health} промахивается по {opponent.name}{opponent.health}")
 
-                    if opponent.health <= 0:
-                        print(f"{opponent.name}{opponent.health} побеждён")
+                        if opponent.health <= 0:
+                            print(f"{opponent.name}{opponent.health} побеждён")
+
+                        break
 
     for hero in heroes:
         if hero.health > 0:
