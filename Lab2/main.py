@@ -2,15 +2,15 @@ import lib
 from lib.person import Person
 
 
-Meowka = Person("Meow", "Meowickin", "1")
-Meowka.info()
-Meowka2 = Person("Meow2", "Meow", "1")
-Meowka2.info()
-Meowkaz = Person("Meowkaz", "Meowin", "1")
-Meowkaz.info()
+p1 = Person("Михаил", "Мяувин")
+p1.info()
+p2 = Person("Матвей", "Котиков", "2")
+p2.info()
+p3 = Person("Мурад", "Мурвин", "3")
+p3.info()
 
-Meowka.faired()
-Meowkaz.up()
-Meowkaz.info()
+p1.faired()
+p2.up()
+p2.info()
 input()
 
