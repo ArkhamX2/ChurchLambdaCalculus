@@ -4,7 +4,6 @@ parsed=[]
 
 def Parse(input):
     tokens = input.split()
-
     for item in tokens:
         if (item == "("): stack.append(item)
         elif (item == ")"):
