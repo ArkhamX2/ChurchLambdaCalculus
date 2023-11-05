@@ -11,6 +11,11 @@ AND         = lambda a: lambda b: a(b)(FALSE)
 XOR         = lambda a: lambda b: a(b(FALSE)(TRUE))(b(TRUE)(FALSE))
 XNOR        = lambda a: lambda b: NOT(XOR(a)(b))
 
+Y = lambda f: (
+    (lambda x: f(lambda y: x(x)(y)))
+    (lambda x: f(lambda y: x(x)(y)))
+)
+
 # Натуральные числа
 INC     = lambda n: lambda a: lambda b: a(n(a)(b))
 ADD     = lambda a: lambda b: a(INC)(b)
@@ -19,6 +24,12 @@ DEC     = lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda _:
 SUB     = lambda a: lambda b: b(DEC)(a)
 POW     = lambda a: lambda b: b(a)
 DIFF    = lambda a: lambda b: ADD(SUB(a)(b))(SUB(b)(a))
+DIV     = Y(
+    lambda f: lambda a: lambda b: LT(a)(b)
+    (lambda _: ZERO)
+    (lambda _: INC(f(SUB(a)(b))(b)))
+    (ZERO)
+)
 
 # Базовые числа Черча
 ZERO    = FALSE
@@ -58,6 +69,7 @@ SADD    = lambda a: lambda b: (
 )
 SSUB    = lambda a: lambda b: SADD(a)(CONS(NOT(CAR(b)))(CDR(b)))
 SMUL    = lambda a: lambda b: CONS(XNOR(CAR(a))(CAR(b)))(MUL(CDR(a))(CDR(b)))
+SDIV    = lambda a: lambda b: CONS(XNOR(CAR(a))(CAR(b)))(DIV(CDR(a))(CDR(b)))
 
 # Конвертация числа Черча в конкретное число.
 INC_INT = lambda x: x + 1
