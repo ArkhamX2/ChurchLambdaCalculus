@@ -68,11 +68,21 @@ SIGNED_DIVIDE   = lambda a: lambda b: PAIR(XNOR(PAIR_SIGN(a))(PAIR_SIGN(b)))(DIV
 ENCODE_INCREMENT    = lambda x: x + 1
 ENCODE_NATURAL      = lambda n: n(ENCODE_INCREMENT)(0)
 
-def decodeBoolean(value):
+def decodeBoolean(value: bool):
     return TRUE if value else FALSE
 
-def decodeNatural(value):
+def decodeNatural(value: int):
     return INCREMENT(decodeNatural(value - 1)) if value > 0 else FALSE
 
-def decodeSigned(value):
+def decodeSigned(value: int):
     return PAIR(TRUE if value >= 0 else FALSE)(decodeNatural(abs(value)))
+
+def encodeBoolean(function):
+    return function is TRUE
+
+def encodeNatural(function):
+    return ENCODE_NATURAL(function)
+
+def encodeSigned(function):
+    value = encodeNatural(UNSIGN(function))
+    return value if IS_POSITIVE(function) is TRUE else 0 - value
