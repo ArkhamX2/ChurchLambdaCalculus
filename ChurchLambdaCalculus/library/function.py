@@ -1,87 +1,78 @@
-IDENTITY    = lambda a: a
-NULL        = lambda _: TRUE
-IS_NULL     = lambda _: lambda _: FALSE
-
 # Логика
-TRUE        = lambda a: lambda b: a
-FALSE       = lambda a: lambda b: b
-NOT         = lambda a: a(FALSE)(TRUE)
-OR          = lambda a: lambda b: a(TRUE)(b)
-AND         = lambda a: lambda b: a(b)(FALSE)
-XOR         = lambda a: lambda b: a(b(FALSE)(TRUE))(b(TRUE)(FALSE))
-XNOR        = lambda a: lambda b: NOT(XOR(a)(b))
+TRUE    = lambda a: lambda b: a
+FALSE   = lambda a: lambda b: b
+NOT     = lambda a: a(FALSE)(TRUE)
+OR      = lambda a: lambda b: a(TRUE)(b)
+AND     = lambda a: lambda b: a(b)(FALSE)
+XOR     = lambda a: lambda b: a(b(FALSE)(TRUE))(b(TRUE)(FALSE))
+XNOR    = lambda a: lambda b: NOT(XOR(a)(b))
 
-Y = lambda f: (
+ID          = lambda a: a
+COMBINE_Y   = lambda f: (
     (lambda x: f(lambda y: x(x)(y)))
     (lambda x: f(lambda y: x(x)(y)))
 )
 
 # Натуральные числа
-INC     = lambda n: lambda a: lambda b: a(n(a)(b))
-ADD     = lambda a: lambda b: a(INC)(b)
-MUL     = lambda a: lambda b: lambda c: a(b(c))
-DEC     = lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda _: x)(IDENTITY)
-SUB     = lambda a: lambda b: b(DEC)(a)
-POW     = lambda a: lambda b: b(a)
-DIFF    = lambda a: lambda b: ADD(SUB(a)(b))(SUB(b)(a))
-DIV     = Y(
-    lambda f: lambda a: lambda b: LT(a)(b)
-    (lambda _: ZERO)
-    (lambda _: INC(f(SUB(a)(b))(b)))
-    (ZERO)
+INCREMENT   = lambda n: lambda a: lambda b: a(n(a)(b))
+ADD         = lambda a: lambda b: a(INCREMENT)(b)
+MULTIPLY    = lambda a: lambda b: lambda c: a(b(c))
+DECREMENT   = lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda _: x)(ID)
+SUBTRACT    = lambda a: lambda b: b(DECREMENT)(a)
+POWER       = lambda a: lambda b: b(a)
+DIFF        = lambda a: lambda b: ADD(SUBTRACT(a)(b))(SUBTRACT(b)(a))
+DIVIDE      = COMBINE_Y(
+    lambda f: lambda a: lambda b: IS_LOWER(a)(b)
+    (lambda _: FALSE)
+    (lambda _: INCREMENT(f(SUBTRACT(a)(b))(b)))
+    (FALSE)
 )
-
-# Базовые числа Черча
-ZERO    = FALSE
-ONE     = IDENTITY
 
 # Проверки
-IS_ZERO = lambda a: a(lambda _: FALSE)(TRUE)
-GTE     = lambda a: lambda b: IS_ZERO(SUB(b)(a))
-LTE     = lambda a: lambda b: IS_ZERO(SUB(a)(b))
-GT      = lambda a: lambda b: IS_ZERO(SUB(INC(b))(a))
-LT      = lambda a: lambda b: IS_ZERO(SUB(INC(a))(b))
-EQ      = lambda a: lambda b: AND(GTE(a)(b))(LTE(a)(b))
+IS_ZERO             = lambda a: a(lambda _: FALSE)(TRUE)
+IS_GREATER_OR_EQUAL = lambda a: lambda b: IS_ZERO(SUBTRACT(b)(a))
+IS_GREATER          = lambda a: lambda b: IS_ZERO(SUBTRACT(INCREMENT(b))(a))
+IS_LOWER_OR_EQUAL   = lambda a: lambda b: IS_ZERO(SUBTRACT(a)(b))
+IS_LOWER            = lambda a: lambda b: IS_ZERO(SUBTRACT(INCREMENT(a))(b))
+IS_EQUAL            = lambda a: lambda b: AND(IS_GREATER_OR_EQUAL(a)(b))(IS_LOWER_OR_EQUAL(a)(b))
 
 # Максимум и минимум
-MIN = lambda a: lambda b: LTE(a)(b)(a)(b)
-MAX = lambda a: lambda b: GTE(a)(b)(a)(b)
+MIN = lambda a: lambda b: IS_LOWER_OR_EQUAL(a)(b)(a)(b)
+MAX = lambda a: lambda b: IS_GREATER_OR_EQUAL(a)(b)(a)(b)
 
 # Пары
-CONS    = lambda a: lambda b: lambda c: c(a)(b)
-CAR     = lambda p: p(TRUE)
-CDR     = lambda p: p(FALSE)
+PAIR        = lambda a: lambda b: lambda c: c(a)(b)
+PAIR_SIGN   = lambda p: p(TRUE)
+PAIR_VALUE  = lambda p: p(FALSE)
 
 # Числа и знаки
-SIGN    = lambda n: CONS(TRUE)(n)
-NEG     = lambda p: CONS(NOT(CAR(p)))(CDR(p))
-ISPOS   = lambda p: CAR(p)
-ISNEG   = lambda p: NOT(CAR(p))
-UNSIGN  = lambda p: CDR(p)
-SADD    = lambda a: lambda b: (
-    XNOR(CAR(a))(CAR(b))
-    (CONS(CAR(a))(ADD(CDR(a))(CDR(b))))  # одинаковые знаки
+SIGN        = lambda n: PAIR(TRUE)(n)
+UNSIGN      = lambda p: PAIR_VALUE(p)
+NEGATE      = lambda p: PAIR(NOT(PAIR_SIGN(p)))(PAIR_VALUE(p))
+IS_POSITIVE = lambda p: PAIR_SIGN(p)
+IS_NEGATIVE = lambda p: NOT(PAIR_SIGN(p))
+SIGNED_ADD  = lambda a: lambda b: (
+    XNOR(PAIR_SIGN(a))(PAIR_SIGN(b))
+    (PAIR(PAIR_SIGN(a))(ADD(PAIR_VALUE(a))(PAIR_VALUE(b))))
     (
-        CONS # разные знаки
-        (XOR(CAR(a))(LTE(CDR(a))(CDR(b))))  # вычисление знака
-        (DIFF(CDR(a))(CDR(b)))   # вычисление значения
+        PAIR
+        (XOR(PAIR_SIGN(a))(IS_LOWER_OR_EQUAL(PAIR_VALUE(a))(PAIR_VALUE(b))))
+        (DIFF(PAIR_VALUE(a))(PAIR_VALUE(b)))
     )
 )
-SSUB    = lambda a: lambda b: SADD(a)(CONS(NOT(CAR(b)))(CDR(b)))
-SMUL    = lambda a: lambda b: CONS(XNOR(CAR(a))(CAR(b)))(MUL(CDR(a))(CDR(b)))
-SDIV    = lambda a: lambda b: CONS(XNOR(CAR(a))(CAR(b)))(DIV(CDR(a))(CDR(b)))
+SIGNED_SUBTRACT = lambda a: lambda b: SIGNED_ADD(a)(PAIR(NOT(PAIR_SIGN(b)))(PAIR_VALUE(b)))
+SIGNED_MULTIPLY = lambda a: lambda b: PAIR(XNOR(PAIR_SIGN(a))(PAIR_SIGN(b)))(MULTIPLY(PAIR_VALUE(a))(PAIR_VALUE(b)))
+SIGNED_DIVIDE   = lambda a: lambda b: PAIR(XNOR(PAIR_SIGN(a))(PAIR_SIGN(b)))(DIVIDE(PAIR_VALUE(a))(PAIR_VALUE(b)))
 
 # Конвертация числа Черча в конкретное число.
-INC_INT = lambda x: x + 1
-TO_INT  = lambda n: n(INC_INT)(0)
+ENCODE_INCREMENT    = lambda x: x + 1
+ENCODE_NATURAL      = lambda n: n(ENCODE_INCREMENT)(0)
 
-# Сконвертировать конкретное число в число Черча. 
-def int2church(i):
-    if i <= 0:
-        return ZERO
-    else:
-        return INC(int2church(i - 1))
+def decodeBoolean(value):
+    return TRUE if value else FALSE
 
-# Исполнить код в строке и напечатать результат.
-def peval(s):
-    print(s + ' = ' + str(eval(s)))
+def decodeNatural(value):
+    return INCREMENT(decodeNatural(value - 1)) if value > 0 else FALSE
+
+def decodeSigned(value):
+    return PAIR(TRUE if value >= 0 else FALSE)(decodeNatural(abs(value)))
