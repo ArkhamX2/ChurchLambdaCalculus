@@ -1,8 +1,13 @@
+import sys
+
+# setting path
+sys.path.append('../library/')
+
 from typing import Optional
 from PySide6.QtCore import QtMsgType
 from PySide6.QtWidgets import QWidget
 from library.ArithmeticParser import Parse
-from UI.ui_calculus_widget import Ui_MainWindow
+from UI.ui_calculus import Ui_MainWindow
 
 class Widget(QWidget,Ui_MainWindow):
     def __init__(self):
@@ -24,25 +29,25 @@ class Widget(QWidget,Ui_MainWindow):
         # self.FALSEbutton.clicked.connect(self.FALSE)
         
     def plus(self):
-        self.Result.setText(self.Result.toPlainText + " +")
+        self.Result.setText(self.Result.toPlainText() + " +")
     def minus(self):
-        self.Result.setText(self.Result.toPlainText + " -")
+        self.Result.setText(self.Result.toPlainText() + " -")
     def multiply(self):
-        self.Result.setText(self.Result.toPlainText + " *")
+        self.Result.setText(self.Result.toPlainText() + " *")
     def OR(self):
-        self.Result.setText(self.Result.toPlainText + " V")
+        self.Result.setText(self.Result.toPlainText() + " V")
     def AND(self):
-        self.Result.setText(self.Result.toPlainText + " ^")
+        self.Result.setText(self.Result.toPlainText() + " ^")
     def XOR(self):
-        self.Result.setText(self.Result.toPlainText + " XOR")
+        self.Result.setText(self.Result.toPlainText() + " XOR")
     def NOT(self):
-        self.Result.setText(self.Result.toPlainText + " !")
+        self.Result.setText(self.Result.toPlainText() + " !")
     def EQUALITY(self):
-        self.Result.setText(self.Result.toPlainText + " ==")
+        self.Result.setText(self.Result.toPlainText() + " ==")
     def TRUE(self):
-        self.Result.setText(self.Result.toPlainText + " True")
+        self.Result.setText(self.Result.toPlainText() + " True")
     def FALSE(self):
-        self.Result.setText(self.Result.toPlainText + " False")
+        self.Result.setText(self.Result.toPlainText() + " False")
 
     def Evaluate(self):
         self.Result.setText(Parse(self.Result.toPlainText()))

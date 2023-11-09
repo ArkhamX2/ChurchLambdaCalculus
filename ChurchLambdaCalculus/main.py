@@ -2,6 +2,7 @@ import sys
 from PySide6 import QtWidgets
 from PySide6.QtUiTools import QUiLoader
 from UI.widget import Widget
+from UI.ui_calculus import Ui_MainWindow
 
 loader = QUiLoader()
 
