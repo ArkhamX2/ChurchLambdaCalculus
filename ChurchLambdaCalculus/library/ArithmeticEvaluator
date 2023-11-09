@@ -1,0 +1,27 @@
+from ArithmeticParser import Parse
+operations = []
+
+def EvaluateEquation(tokensInp):
+    for i in range(len(tokensInp)):
+        operations.append(tokensInp[i])
+        curToken = operations[i]
+        match curToken:
+            case "-":
+                operations.pop()
+                operations.append(str())
+                break
+            case "+":
+                operations.pop()
+                operations.append(str())
+                break
+            case "*":
+                operations.pop()
+                operations.append(str())
+                break
+            case "/":
+                operations.pop()
+                operations.append(str())
+                break        
+            case _:
+                break
+    return Parse(operations.pop())
