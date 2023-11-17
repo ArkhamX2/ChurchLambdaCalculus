@@ -17,8 +17,9 @@ for x in np.arange(a,b+h,h):
 #print(res)
 counter = 1
 
+
 print('%-8s %-10s %-15s' % ("№", "x", "f(x)"))
 for i in np.arange(a,b+h,h):
-    print('%-8d %-10.2f %-15.2f' % (counter, i, res[counter-1]))
-    #print("{0}".format(counter) + "{:10.2f}".format(i).ljust(10) + "{:18.3f}".format(res[counter-1]).ljust(16))
+    #print('%-8d %-10.2f %-15.2f' % (counter, i, res[counter-1]))
+    print("{:<9}".format(counter) + f"{'{:.2f}'.format(i).rstrip('0').rstrip('.'):<11}" + f"{'{:.3f}'.format(res[counter-1]).rstrip('0').rstrip('.'):<15}")
     counter += 1
