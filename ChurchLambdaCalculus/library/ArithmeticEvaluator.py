@@ -7,20 +7,25 @@ def EvaluateEquation(tokensInp):
         match curToken:
             case "-":
                 operations.pop()
-                operations.append(str(-1*float(operations.pop()) + float(operations.pop())))
+                second = str(operations.pop())
+                first = str(operations.pop())
+                operations.append("SIGNED_SUBTRACT(" + first + ")(" + second + ")")
                 pass
             case "+":
                 operations.pop()
-                operations.append(str(float(operations.pop()) + float(operations.pop())))
+                operations.append("SIGNED_ADD(" + str(operations.pop()) + ")(" + str(operations.pop()) + ")")
                 pass
             case "*":
                 operations.pop()
-                operations.append(str(float(operations.pop()) * float(operations.pop())))
+                operations.append("SIGNED_MULTIPLY(" + str(operations.pop()) + ")(" + str(operations.pop()) + ")")
                 pass
             case "/":
                 operations.pop()
-                operations.append(str(1/float(operations.pop()) * float(operations.pop())))
+                second = str(operations.pop())
+                first = str(operations.pop())
+                operations.append("SIGNED_DIVIDE(" + first + ")(" + second + ")")
                 pass        
             case _:
+                operations.append("decodeSigned("+str(operations.pop())+")")
                 pass
-    return float(operations.pop())
+    return "encodeSigned(" + operations.pop() + ")"
