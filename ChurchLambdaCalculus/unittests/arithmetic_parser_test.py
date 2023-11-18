@@ -3,7 +3,7 @@ import unittest
 # setting path
 sys.path.append('../library/')
 
-from library.arithmeticparser import *
+from library.arithmetic_parser import *
 
 class Test(unittest.TestCase):
     def init():
