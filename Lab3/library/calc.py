@@ -9,7 +9,7 @@ def LinearList(inputParameters:[float]):
     parameterM=inputParameters[4]
     result = []
 
-    for x in np.arange(leftBorder,rightBorder,step):
+    for x in np.arange(leftBorder,rightBorder+step,step):
         #np.append(result,LinearFunction([parameterK,x,parameterM])[0])
         result.append(LinearFunction([parameterK,x,parameterM]))
 
