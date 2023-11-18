@@ -3,7 +3,7 @@ import unittest
 # setting path
 sys.path.append('../library/')
 
-from library.arithmeticevaluator import *
+from library.arithmetic_evaluator import *
 from library.function import *
 
 class Test(unittest.TestCase):
