@@ -1,5 +1,3 @@
-from ArithmeticEvaluator import *
-from function import *
 tokens=[]
 stack=[]
 parsed=[]
@@ -40,6 +38,3 @@ def isOperator(c):
         return True
     else:
         return False
-    
-if __name__ == '__main__':
-    print(eval(EvaluateEquation(Parse("( 3 * ( 5 - 2 ) + 9 ) / 2"))))
