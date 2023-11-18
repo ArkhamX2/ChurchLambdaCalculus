@@ -6,7 +6,7 @@ sys.path.append('../library/')
 from typing import Optional
 from PySide6.QtCore import QtMsgType
 from PySide6.QtWidgets import QWidget
-from library.ArithmeticParser import Parse
+from library.arithmetic_parser import Parse
 from UI.ui_calculus import Ui_MainWindow
 
 class Widget(QWidget,Ui_MainWindow):
