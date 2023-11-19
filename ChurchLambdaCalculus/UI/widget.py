@@ -20,7 +20,8 @@ class Widget(QWidget,Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("Lambda Calculus")
         self.InputText=[]
-        
+        self.logical=False
+        self.UiEnableSwitch()
         self.Plus.clicked.connect(self.plus)
         self.Minus.clicked.connect(self.minus)
         self.Mult.clicked.connect(self.multiply)
@@ -29,6 +30,7 @@ class Widget(QWidget,Ui_MainWindow):
         self.MultLog.clicked.connect(self.AND)
         self.NotLog.clicked.connect(self.NOT)
         self.XorLog.clicked.connect(self.XOR)
+        self.EqLog.clicked.connect(self.EQUALITY)
         self.TrueButton.clicked.connect(self.TRUE)
         self.FalseButton.clicked.connect(self.FALSE)
         self.One.clicked.connect(self.ONE)
@@ -42,34 +44,73 @@ class Widget(QWidget,Ui_MainWindow):
         self.Nine.clicked.connect(self.NINE)
         self.Zer0.clicked.connect(self.ZERO)
         self.ClearButton.clicked.connect(self.CLEARALL)
-        self.DeleteButton.clicked.connect(self.DELETELAST)
-        self.EqLog.clicked.connect(self.EQUALITY)
+        self.DeleteButton.clicked.connect(self.DELETELAST)        
         self.Evaluate.clicked.connect(self.EVALUATE)
+        self.LogcalcButton.clicked.connect(self.LOGCALC)
+
+    def UiEnableSwitch(self):
+        if self.logical==False:
+            self.Plus.setEnabled(True)
+            self.Minus.setEnabled(True)
+            self.Mult.setEnabled(True)
+            self.Div.setEnabled(True)
+            self.One.setEnabled(True)
+            self.Two.setEnabled(True)
+            self.Three.setEnabled(True)
+            self.Four.setEnabled(True)
+            self.Five.setEnabled(True)
+            self.Six.setEnabled(True)
+            self.Seven.setEnabled(True)
+            self.Eight.setEnabled(True)
+            self.Nine.setEnabled(True)
+            self.Zer0.setEnabled(True)
+
+            self.PlusLog.setEnabled(False)
+            self.MultLog.setEnabled(False)
+            self.NotLog.setEnabled(False)
+            self.XorLog.setEnabled(False)
+            self.EqLog.setEnabled(False)
+            self.TrueButton.setEnabled(False)
+            self.FalseButton.setEnabled(False)
+        else:
+            self.Plus.setEnabled(False)
+            self.Minus.setEnabled(False)
+            self.Mult.setEnabled(False)
+            self.Div.setEnabled(False)
+            self.One.setEnabled(False)
+            self.Two.setEnabled(False)
+            self.Three.setEnabled(False)
+            self.Four.setEnabled(False)
+            self.Five.setEnabled(False)
+            self.Six.setEnabled(False)
+            self.Seven.setEnabled(False)
+            self.Eight.setEnabled(False)
+            self.Nine.setEnabled(False)
+            self.Zer0.setEnabled(False)
+
+            self.PlusLog.setEnabled(True)
+            self.MultLog.setEnabled(True)
+            self.NotLog.setEnabled(True)
+            self.XorLog.setEnabled(True)
+            self.EqLog.setEnabled(True)
+            self.TrueButton.setEnabled(True)
+            self.FalseButton.setEnabled(True)
+
+    def LOGCALC(self):
+        if self.logical==True:
+            self.logical=False
+            self.CLEARALL()
+            self.Result.setText("")
+            self.UiEnableSwitch()            
+        else:
+            self.logical=True
+            self.CLEARALL()
+            self.Result.setText("")
+            self.UiEnableSwitch()            
 
     def IsNumber(self, item):
-        match item:
-            case "0":
-                return True
-            case "1":
-                return True
-            case "2":
-                return True
-            case "3":
-                return True
-            case "4":
-                return True
-            case "5":
-                return True
-            case "6":
-                return True
-            case "7":
-                return True
-            case "8":
-                return True
-            case "9":
-                return True
-            case _:
-                return False
+        numbers="0123456789"
+        return numbers.find(item)!=-1
 
     def MakeString(self):
         answ=""
@@ -178,39 +219,56 @@ class Widget(QWidget,Ui_MainWindow):
         if len(self.InputText)==0:
             self.Result.setText("")
         else:
-            self.Result.setText(str(eval(EvaluateEquation(Parse(self.MakeString())))))
+            if self.logical==False:
+                self.Result.setText(str(eval(EvaluateEquation(Parse(self.MakeString())))))
+            else:
+                self.Result.setText(str(bool(eval(EvaluateEquation(Parse(self.MakeString()))))))
 
     def keyPressEvent(self, event):
         if (event.type() == QtCore.QEvent.KeyPress):
+                if self.logical==False:
+                    match event.key():
+                        case QtCore.Qt.Key_0:
+                            self.ZERO()
+                        case QtCore.Qt.Key_1:
+                            self.ONE()
+                        case QtCore.Qt.Key_2:
+                            self.TWO()
+                        case QtCore.Qt.Key_3:
+                            self.THREE()
+                        case QtCore.Qt.Key_4:
+                            self.FOUR()
+                        case QtCore.Qt.Key_5:
+                            self.FIVE()
+                        case QtCore.Qt.Key_6:
+                            self.SIX()
+                        case QtCore.Qt.Key_7:
+                            self.SEVEN()
+                        case QtCore.Qt.Key_8:
+                            self.EIGHT()
+                        case QtCore.Qt.Key_9:
+                            self.NINE()
+                        case QtCore.Qt.Key_Plus:
+                            self.plus()
+                        case QtCore.Qt.Key_Minus:
+                            self.minus()
+                        case QtCore.Qt.Key_Asterisk:
+                            self.multiply()
+                        case QtCore.Qt.Key_Slash:
+                            self.divide()
+                else:
+                    match event.key():
+                        case QtCore.Qt.Key_0:
+                            self.FALSE()
+                        case QtCore.Qt.Key_1:
+                            self.TRUE()
+                        case QtCore.Qt.Key_Plus:
+                            self.OR()
+                        case QtCore.Qt.Key_Minus:
+                            self.NOT()
+                        case QtCore.Qt.Key_Asterisk:
+                            self.AND()
                 match event.key():
-                    case QtCore.Qt.Key_0:
-                        self.ZERO()
-                    case QtCore.Qt.Key_1:
-                        self.ONE()
-                    case QtCore.Qt.Key_2:
-                        self.TWO()
-                    case QtCore.Qt.Key_3:
-                        self.THREE()
-                    case QtCore.Qt.Key_4:
-                        self.FOUR()
-                    case QtCore.Qt.Key_5:
-                        self.FIVE()
-                    case QtCore.Qt.Key_6:
-                        self.SIX()
-                    case QtCore.Qt.Key_7:
-                        self.SEVEN()
-                    case QtCore.Qt.Key_8:
-                        self.EIGHT()
-                    case QtCore.Qt.Key_9:
-                        self.NINE()
-                    case QtCore.Qt.Key_Plus:
-                        self.plus()
-                    case QtCore.Qt.Key_Minus:
-                        self.minus()
-                    case QtCore.Qt.Key_Asterisk:
-                        self.multiply()
-                    case QtCore.Qt.Key_Slash:
-                        self.divide()
                     case QtCore.Qt.Key_Backspace:
                         self.DELETELAST()
                     case QtCore.Qt.Key_Delete:

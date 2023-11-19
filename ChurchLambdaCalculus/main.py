@@ -4,6 +4,8 @@ from PySide6.QtUiTools import QUiLoader
 from UI.widget import Widget
 from UI.ui_calculus import Ui_MainWindow
 
+sys.setrecursionlimit(10022)
+
 loader = QUiLoader()
 
 app = QtWidgets.QApplication(sys.argv)
