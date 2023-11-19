@@ -206,6 +206,12 @@ class Widget(QWidget,Ui_MainWindow):
     def ZERO(self):
         self.InputText.append("0")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+    def PARENLEFT(self):
+        self.InputText.append("(")
+        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+    def PARENRIGHT(self):
+        self.InputText.append(")")
+        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def CLEARALL(self):
         self.InputText.clear()
         self.Input.setText("")
@@ -269,6 +275,10 @@ class Widget(QWidget,Ui_MainWindow):
                         case QtCore.Qt.Key_Asterisk:
                             self.AND()
                 match event.key():
+                    case QtCore.Qt.Key_ParenLeft:
+                        self.PARENLEFT()
+                    case QtCore.Qt.Key_ParenRight:
+                        self.PARENRIGHT()
                     case QtCore.Qt.Key_Backspace:
                         self.DELETELAST()
                     case QtCore.Qt.Key_Delete:
