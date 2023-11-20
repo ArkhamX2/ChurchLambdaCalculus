@@ -129,14 +129,25 @@ class Widget(QWidget,Ui_MainWindow):
             self.InputText.append("+")
             self.Input.setText(self.Input.toPlainText() + "0" + self.InputText[len(self.InputText)-1])
         else:
+            if self.IsNumber(self.InputText[len(self.InputText)-1])==False:
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
             self.InputText.append("+")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+                
     def minus(self):
         if len(self.InputText)==0:
             self.InputText.append("0")
             self.InputText.append("-")
             self.Input.setText(self.Input.toPlainText() + "0" + self.InputText[len(self.InputText)-1])
         else:
+            if self.IsNumber(self.InputText[len(self.InputText)-1])==False and (self.InputText[len(self.InputText)-1]!="(" or self.InputText[len(self.InputText)-1]!=")"):
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
             self.InputText.append("-")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def multiply(self):
@@ -145,6 +156,11 @@ class Widget(QWidget,Ui_MainWindow):
             self.InputText.append("*")
             self.Input.setText(self.Input.toPlainText() + "0" + self.InputText[len(self.InputText)-1])
         else:
+            if self.IsNumber(self.InputText[len(self.InputText)-1])==False and (self.InputText[len(self.InputText)-1]!="(" or self.InputText[len(self.InputText)-1]!=")"):
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
             self.InputText.append("*")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def divide(self):
@@ -153,6 +169,11 @@ class Widget(QWidget,Ui_MainWindow):
             self.InputText.append("/")
             self.Input.setText(self.Input.toPlainText() + "0" + self.InputText[len(self.InputText)-1])
         else:
+            if self.IsNumber(self.InputText[len(self.InputText)-1])==False and (self.InputText[len(self.InputText)-2]!="(" or self.InputText[len(self.InputText)-2]!=")"):
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
             self.InputText.append("/")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def OR(self):
@@ -210,8 +231,19 @@ class Widget(QWidget,Ui_MainWindow):
         self.InputText.append("(")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def PARENRIGHT(self):
-        self.InputText.append(")")
-        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        try:
+            if self.InputText[len(self.InputText)-1]=="(":
+                self.InputText.append("0")
+                self.InputText.append(")")
+                self.Input.setText(self.Input.toPlainText() +"0"+ self.InputText[len(self.InputText)-1])
+            else:
+                self.InputText.append(")")
+                self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        except:
+            self.InputText.append("(")
+            self.InputText.append("0")
+            self.InputText.append(")")
+            self.Input.setText(self.Input.toPlainText() +"("+"0"+ self.InputText[len(self.InputText)-1])
     def CLEARALL(self):
         self.InputText.clear()
         self.Input.setText("")
@@ -220,6 +252,24 @@ class Widget(QWidget,Ui_MainWindow):
             self.Input.setText(self.Input.toPlainText()[:len(self.Input.toPlainText())-len(self.InputText.pop())])
         except:
             pass
+
+    def CheckOpenParen(self, input):
+        tmp=input
+        parenleft="("
+        parenleftcount=0
+        parenright=")"
+        parenrightcount=0
+        while tmp.find(parenleft) != -1:
+            parenleftcount+=1
+            tmp=tmp.replace(parenleft, "", 1)            
+        while tmp.find(parenright) != -1:
+            parenrightcount+=1
+            tmp=tmp.replace(parenright, "", 1)
+        if parenleftcount!=parenrightcount:
+            self.Result.setText("Скобки не закрыты")
+            return None
+        else:
+            return input
 
     def CheckDivideZero(self, input):
         tmp=input
@@ -248,19 +298,19 @@ class Widget(QWidget,Ui_MainWindow):
                     else:
                         input = input[:id+2] + substring_eval + input[end+1:]
                         tmp=input
-                        tmp=tmp.replace("/", " ", c)                
+                        tmp=tmp.replace(div, " ", c)                
                 else:
                     if input[id+2]=="0":
                         self.Result.setText("Деление на 0")
                         return None
                     else:
-                        tmp=tmp.replace("/", " ", c)
+                        tmp=tmp.replace(div, " ", c)
             except:
                 if input[id+2]=="0":
                     self.Result.setText("Деление на 0")
                     return None
                 else:
-                    tmp=tmp.replace("/", " ", c)
+                    tmp=tmp.replace(div, " ", c)
             c+=1
         return input
 
@@ -269,9 +319,11 @@ class Widget(QWidget,Ui_MainWindow):
             self.Result.setText("")
         else:
             if self.logical==False:
-                input=self.CheckDivideZero(self.MakeString())
+                input=self.CheckOpenParen(self.MakeString())
                 if input != None:
-                    self.Result.setText(str(eval(EvaluateEquation(Parse(input)))))
+                    input=self.CheckDivideZero(input)
+                    if input != None:
+                        self.Result.setText(str(eval(EvaluateEquation(Parse(input)))))
                 pass
             else:
                 pass
