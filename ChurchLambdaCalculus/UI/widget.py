@@ -235,17 +235,28 @@ class Widget(QWidget,Ui_MainWindow):
     def PARENRIGHT(self):
         try:
             if self.InputText[len(self.InputText)-1]=="(":
-                self.InputText.append("0")
-                self.InputText.append(")")
-                self.Input.setText(self.Input.toPlainText() +"0"+ self.InputText[len(self.InputText)-1])
+                if self.logical == False:
+                    self.InputText.append("0")
+                    self.InputText.append(")")
+                    self.Input.setText(self.Input.toPlainText() +"0"+ self.InputText[len(self.InputText)-1])
+                else:
+                    self.InputText.append("False")
+                    self.InputText.append(")")
+                    self.Input.setText(self.Input.toPlainText() +"False"+ self.InputText[len(self.InputText)-1])
             else:
                 self.InputText.append(")")
                 self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
         except:
-            self.InputText.append("(")
-            self.InputText.append("0")
-            self.InputText.append(")")
-            self.Input.setText(self.Input.toPlainText() +"("+"0"+ self.InputText[len(self.InputText)-1])
+            if self.logical == False:
+                self.InputText.append("(")
+                self.InputText.append("0")
+                self.InputText.append(")")
+                self.Input.setText(self.Input.toPlainText() +"("+"0"+ self.InputText[len(self.InputText)-1])
+            else:
+                self.InputText.append("(")
+                self.InputText.append("False")
+                self.InputText.append(")")
+                self.Input.setText(self.Input.toPlainText() +"("+"False"+ self.InputText[len(self.InputText)-1])
     def CLEARALL(self):
         self.InputText.clear()
         self.Input.setText("")
@@ -254,6 +265,22 @@ class Widget(QWidget,Ui_MainWindow):
             self.Input.setText(self.Input.toPlainText()[:len(self.Input.toPlainText())-len(self.InputText.pop())])
         except:
             pass
+
+    def CheckLastNotOperation(self, input):
+        if self.logical == False:
+            arithmeticoperators="/*+-"
+            if (arithmeticoperators.find(self.InputText[len(self.InputText)-1])==-1):
+                return input
+            else:
+                self.Result.setText("Не закрытая операция")
+                return None
+        else:
+            logicaloperators="!^V⊕≡"
+            if (logicaloperators.find(self.InputText[len(self.InputText)-1])==-1):
+                return input
+            else:
+                self.Result.setText("Не закрытая операция")
+                return None
 
     def CheckOpenParen(self, input):
         tmp=input
@@ -321,17 +348,21 @@ class Widget(QWidget,Ui_MainWindow):
             self.Result.setText("")
         else:
             if self.logical==False:
-                input=self.CheckOpenParen(self.MakeString())
-                if input != None:
-                    input=self.CheckDivideZero(input)
+                input=self.CheckLastNotOperation(self.MakeString())
+                if input!= None:
+                    input=self.CheckOpenParen(input)
                     if input != None:
-                        self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
+                        input=self.CheckDivideZero(input)
+                        if input != None:
+                            self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
                 pass
             else:
                 pass
-                input=self.CheckOpenParen(self.MakeString())
-                if input != None:
-                    self.Result.setText(str(eval(EvaluateLogicalEquation(LogicalParse(input)))))
+                input=self.CheckLastNotOperation(self.MakeString())
+                if input!= None:
+                    input=self.CheckOpenParen(input)
+                    if input != None:
+                        self.Result.setText(str(eval(EvaluateLogicalEquation(LogicalParse(input)))))
 
     def keyPressEvent(self, event):
         if (event.type() == QtCore.QEvent.KeyPress):
