@@ -24,7 +24,7 @@ def Priority(c):
         case "^":
             return 5
         case "/":
-            return 4
+            return 2
         case "*":
             return 2
         case "+":
