@@ -178,6 +178,19 @@ class Widget(QWidget,Ui_MainWindow):
                     self.DELETELAST()
             self.InputText.append("/")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+    def POWER(self):
+        if len(self.InputText)==0:
+            self.InputText.append("0")
+            self.InputText.append("^")
+            self.Input.setText(self.Input.toPlainText() + "0" + self.InputText[len(self.InputText)-1])
+        else:
+            if self.IsNumber(self.InputText[len(self.InputText)-1])==False and (self.InputText[len(self.InputText)-2]!="(" or self.InputText[len(self.InputText)-2]!=")"):
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
+            self.InputText.append("^")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def OR(self):
         self.InputText.append("V")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
@@ -396,6 +409,8 @@ class Widget(QWidget,Ui_MainWindow):
                             self.multiply()
                         case QtCore.Qt.Key_Slash:
                             self.divide()
+                        case QtCore.Qt.Key_AsciiCircum:
+                            self.POWER()
                 else:
                     match event.key():
                         case QtCore.Qt.Key_0:

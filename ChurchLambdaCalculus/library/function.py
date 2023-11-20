@@ -63,6 +63,7 @@ SIGNED_ADD  = lambda a: lambda b: (
 SIGNED_SUBTRACT = lambda a: lambda b: SIGNED_ADD(a)(PAIR(NOT(PAIR_SIGN(b)))(PAIR_VALUE(b)))
 SIGNED_MULTIPLY = lambda a: lambda b: PAIR(XNOR(PAIR_SIGN(a))(PAIR_SIGN(b)))(MULTIPLY(PAIR_VALUE(a))(PAIR_VALUE(b)))
 SIGNED_DIVIDE   = lambda a: lambda b: PAIR(XNOR(PAIR_SIGN(a))(PAIR_SIGN(b)))(DIVIDE(PAIR_VALUE(a))(PAIR_VALUE(b)))
+SIGNED_POWER = lambda a: lambda b: PAIR(XNOR(PAIR_SIGN(a))(PAIR_SIGN(b)))(POWER(PAIR_VALUE(a))(PAIR_VALUE(b)))
 
 # Конвертация числа Черча в конкретное число.
 ENCODE_INCREMENT    = lambda x: x + 1

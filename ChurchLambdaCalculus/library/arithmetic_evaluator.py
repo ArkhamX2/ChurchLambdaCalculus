@@ -23,6 +23,12 @@ def EvaluateArithmeticEquation(tokensInp):
                 second = str(operations.pop())
                 first = str(operations.pop())
                 operations.append("SIGNED_DIVIDE(" + first + ")(" + second + ")")
+                pass    
+            case "^":
+                operations.pop()
+                second = str(operations.pop())
+                first = str(operations.pop())
+                operations.append("SIGNED_POWER(" + first + ")(" + second + ")")
                 pass        
             case _:
                 operations.append("decodeSigned("+str(operations.pop())+")")

@@ -21,6 +21,8 @@ def ArithmeticParse(input):
 
 def Priority(c):
     match (c):
+        case "^":
+            return 5
         case "/":
             return 4
         case "*":
@@ -33,7 +35,7 @@ def Priority(c):
             return 0
 
 def isOperator(c):
-    if (c=="+" or c== "-" or c=="*" or c=="/"):
+    if (c=="+" or c== "-" or c=="*" or c=="/" or c=="^"):
         return True
     else:
         return False
