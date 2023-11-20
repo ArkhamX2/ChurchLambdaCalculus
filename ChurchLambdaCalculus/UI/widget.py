@@ -437,8 +437,6 @@ class Widget(QWidget,Ui_MainWindow):
                 match event.key():
                     case QtCore.Qt.Key_M:
                         self.LogcalcButton.click()
-                    case QtCore.Qt.Key_Z:
-                        self.NegativeNumbers()
                     case QtCore.Qt.Key_ParenLeft:
                         self.PARENLEFT()
                     case QtCore.Qt.Key_ParenRight:
