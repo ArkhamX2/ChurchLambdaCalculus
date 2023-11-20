@@ -291,7 +291,7 @@ class Widget(QWidget,Ui_MainWindow):
 
     def CheckLastNotOperation(self, input):
         if self.logical == False:
-            arithmeticoperators="/*+-"
+            arithmeticoperators="/*+-^"
             if (arithmeticoperators.find(self.InputText[len(self.InputText)-1])==-1):
                 return input
             else:
