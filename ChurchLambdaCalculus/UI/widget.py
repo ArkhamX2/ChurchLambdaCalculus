@@ -9,8 +9,10 @@ from typing import Optional
 from PySide6 import QtCore
 from PySide6.QtWidgets import QWidget
 from PySide6.QtCore import QEvent
-from library.arithmetic_parser import Parse
-from library.arithmetic_evaluator import EvaluateEquation
+from library.arithmetic_parser import ArithmeticParse
+from library.logical_parser import LogicalParse
+from library.arithmetic_evaluator import EvaluateArithmeticEquation
+from library.logical_evaluator import EvaluateLogicalEquation
 from library.function import *
 from UI.ui_calculus import Ui_MainWindow
 
@@ -183,7 +185,7 @@ class Widget(QWidget,Ui_MainWindow):
         self.InputText.append("^")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def XOR(self):
-        self.InputText.append("XOR")
+        self.InputText.append("⊕")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def NOT(self):
         self.InputText.append("!")
@@ -291,7 +293,7 @@ class Widget(QWidget,Ui_MainWindow):
                                 end=i
                                 break
                     substring=input[id+2:end+1]
-                    substring_eval=str(eval(EvaluateEquation(Parse(substring))))
+                    substring_eval=str(eval(EvaluateArithmeticEquation(ArithmeticParse(substring))))
                     if substring_eval == "0":
                         self.Result.setText("Деление на 0")
                         return None
@@ -323,11 +325,13 @@ class Widget(QWidget,Ui_MainWindow):
                 if input != None:
                     input=self.CheckDivideZero(input)
                     if input != None:
-                        self.Result.setText(str(eval(EvaluateEquation(Parse(input)))))
+                        self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
                 pass
             else:
                 pass
-                #self.Result.setText(str(bool(eval(EvaluateEquation(Parse(self.MakeString()))))))
+                input=self.CheckOpenParen(self.MakeString())
+                if input != None:
+                    self.Result.setText(str(eval(EvaluateLogicalEquation(LogicalParse(input)))))
 
     def keyPressEvent(self, event):
         if (event.type() == QtCore.QEvent.KeyPress):

@@ -1,6 +1,5 @@
-operations = []
-
-def EvaluateEquation(tokensInp):
+def EvaluateArithmeticEquation(tokensInp):
+    operations = []
     for i in range(len(tokensInp)):
         operations.append(tokensInp[i])
         curToken = operations[len(operations)-1]
