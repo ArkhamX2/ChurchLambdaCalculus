@@ -279,6 +279,16 @@ class Widget(QWidget,Ui_MainWindow):
         except:
             pass
 
+    def NegativeNumbers(self):
+        try:
+            for i in range (len(self.InputText)-1):
+                if self.InputText[i]=="-":
+                    if self.InputText[i-1] == "(" and self.InputText[i+2] == ")":
+                       self.InputText[i]=self.InputText[i]+self.InputText[i+1]
+                       self.InputText.pop(i+1)
+        except:
+            pass
+
     def CheckLastNotOperation(self, input):
         if self.logical == False:
             arithmeticoperators="/*+-"
@@ -361,6 +371,7 @@ class Widget(QWidget,Ui_MainWindow):
             self.Result.setText("")
         else:
             if self.logical==False:
+                self.NegativeNumbers()
                 input=self.CheckLastNotOperation(self.MakeString())
                 if input!= None:
                     input=self.CheckOpenParen(input)
@@ -426,6 +437,8 @@ class Widget(QWidget,Ui_MainWindow):
                 match event.key():
                     case QtCore.Qt.Key_M:
                         self.LogcalcButton.click()
+                    case QtCore.Qt.Key_Z:
+                        self.NegativeNumbers()
                     case QtCore.Qt.Key_ParenLeft:
                         self.PARENLEFT()
                     case QtCore.Qt.Key_ParenRight:
