@@ -321,6 +321,14 @@ class Widget(QWidget,Ui_MainWindow):
             self.Result.setText("Скобки не закрыты")
             return None
         else:
+            for i in range(len(self.InputText)):
+                if self.InputText[i]=="(":
+                    try:
+                        if self.InputText[i+1] != None:
+                            pass
+                    except:
+                        self.Result.setText("Скобки не закрыты")
+                        return None                    
             return input
 
     def CheckDivideZero(self, input):
