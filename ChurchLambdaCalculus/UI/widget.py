@@ -221,14 +221,61 @@ class Widget(QWidget,Ui_MainWindow):
         except:
             pass
 
+    def CheckDivideZero(self, input):
+        tmp=input
+        id=0
+        div="/"
+        end=0
+        c=1
+        while tmp.find(div) != -1:
+            id=(tmp.find(div))
+            try:            
+                if input[id+3]=="(":
+                    depth=0
+                    for i in range(id+3,len(input)):
+                        if input[i]=="(":
+                            depth+=1
+                        if input[i]==")":
+                            depth-=1
+                            if depth==0:
+                                end=i
+                                break
+                    substring=input[id+2:end+1]
+                    substring_eval=str(eval(EvaluateEquation(Parse(substring))))
+                    if substring_eval == "0":
+                        self.Result.setText("Деление на 0")
+                        return None
+                    else:
+                        input = input[:id+2] + substring_eval + input[end+1:]
+                        tmp=input
+                        tmp=tmp.replace("/", " ", c)                
+                else:
+                    if input[id+2]=="0":
+                        self.Result.setText("Деление на 0")
+                        return None
+                    else:
+                        tmp=tmp.replace("/", " ", c)
+            except:
+                if input[id+2]=="0":
+                    self.Result.setText("Деление на 0")
+                    return None
+                else:
+                    tmp=tmp.replace("/", " ", c)
+            c+=1
+        return input
+
     def EVALUATE(self):
         if len(self.InputText)==0:
             self.Result.setText("")
         else:
             if self.logical==False:
-                self.Result.setText(str(eval(EvaluateEquation(Parse(self.MakeString())))))
+                input=self.CheckDivideZero(self.MakeString())
+                if input != None:
+                    self.Result.setText(str(eval(EvaluateEquation(Parse(input)))))
+                pass
             else:
-                self.Result.setText(str(bool(eval(EvaluateEquation(Parse(self.MakeString()))))))
+                pass
+                #self.Result.setText(str(bool(eval(EvaluateEquation(Parse(self.MakeString()))))))
 
     def keyPressEvent(self, event):
         if (event.type() == QtCore.QEvent.KeyPress):
@@ -275,6 +322,8 @@ class Widget(QWidget,Ui_MainWindow):
                         case QtCore.Qt.Key_Asterisk:
                             self.AND()
                 match event.key():
+                    case QtCore.Qt.Key_M:
+                        self.LogcalcButton.click()
                     case QtCore.Qt.Key_ParenLeft:
                         self.PARENLEFT()
                     case QtCore.Qt.Key_ParenRight:
