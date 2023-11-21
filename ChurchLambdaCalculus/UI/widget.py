@@ -208,7 +208,7 @@ class Widget(QWidget,Ui_MainWindow):
     def OR(self):
         if len(self.InputText)==0:
             self.InputText.append("True")
-            self.InputText.append("V")
+            self.InputText.append("∨")
             self.Input.setText(self.Input.toPlainText() + "True" + self.InputText[len(self.InputText)-1])
         else:
             if self.IsLogical(self.InputText[len(self.InputText)-1])==False:
@@ -216,7 +216,7 @@ class Widget(QWidget,Ui_MainWindow):
                     pass
                 else:
                     self.DELETELAST()
-            self.InputText.append("V")
+            self.InputText.append("∨")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
 
     def AND(self):
@@ -246,7 +246,7 @@ class Widget(QWidget,Ui_MainWindow):
             self.InputText.append("⊕")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def NOT(self):
-        self.InputText.append("!")
+        self.InputText.append("¬")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def EQUALITY(self):
         if len(self.InputText)==0:
@@ -353,7 +353,7 @@ class Widget(QWidget,Ui_MainWindow):
                 self.Result.setText("Не закрытая операция")
                 return None
         else:
-            logicaloperators="!^V⊕≡"
+            logicaloperators="¬∧∨⊕≡"
             if (logicaloperators.find(self.InputText[len(self.InputText)-1])==-1):
                 return input
             else:
@@ -390,11 +390,11 @@ class Widget(QWidget,Ui_MainWindow):
         tmp=self.InputText        
         for i in range(len(tmp)-1):
             try:
-                if tmp[i]=="!":
+                if tmp[i]=="¬":
                     counter=0
                     try:
                         j=i+1
-                        while tmp[j]=="!":
+                        while tmp[j]=="¬":
                             try:
                                 tmp.pop(j)
                                 counter+=1
