@@ -22,4 +22,4 @@ class Test(unittest.TestCase):
         self.assertEqual(Priority("*"),2)
 
     def test_Parse(self):
-        self.assertEqual(Parse("5 + ( 6 + 10 + 3 * ( 22 + 65 ) + 16 ) + 2 + 1"),['5', '6', '10', '+', '3', '22', '65', '+', '*', '+', '16', '+', '+', '2', '+', '1', '+'])
+        self.assertEqual(ArithmeticParse("5 + ( 6 + 10 + 3 * ( 22 + 65 ) + 16 ) + 2 + 1"),['5', '6', '10', '+', '3', '22', '65', '+', '*', '+', '16', '+', '+', '2', '+', '1', '+'])
