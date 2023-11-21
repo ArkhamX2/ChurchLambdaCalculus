@@ -385,6 +385,29 @@ class Widget(QWidget,Ui_MainWindow):
                         self.Result.setText("Скобки не закрыты")
                         return None                    
             return input
+        
+    def NotSimplify(self):        
+        for i in range(len(self.InputText)-1):
+            try:
+                if self.InputText[i]=="!":
+                    counter=0
+                    try:
+                        j=i+1
+                        while self.InputText[j]=="!":
+                            try:
+                                self.InputText.pop(j)
+                                counter+=1
+                                j+=1
+                            except:
+                                break
+                    except:
+                        pass
+                    if (counter % 2 == 1):
+                        self.InputText.pop(i)
+            except:
+                pass
+        print(self.InputText)
+        pass
 
     def CheckDivideZero(self, input):
         tmp=input
@@ -445,6 +468,7 @@ class Widget(QWidget,Ui_MainWindow):
                 pass
             else:
                 pass
+                self.NotSimplify()
                 input=self.CheckLastNotOperation(self.MakeString())
                 if input!= None:
                     input=self.CheckOpenParen(input)
@@ -500,6 +524,8 @@ class Widget(QWidget,Ui_MainWindow):
                 match event.key():
                     case QtCore.Qt.Key_M:
                         self.LogcalcButton.click()
+                    case QtCore.Qt.Key_Z:
+                        self.NotSimplify()
                     case QtCore.Qt.Key_ParenLeft:
                         self.PARENLEFT()
                     case QtCore.Qt.Key_ParenRight:
