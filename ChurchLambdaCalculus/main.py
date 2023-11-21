@@ -5,6 +5,7 @@ from UI.widget import Widget
 from UI.ui_calculus import Ui_MainWindow
 
 sys.setrecursionlimit(10022)
+#sys.setrecursionlimit(2147483647)
 
 loader = QUiLoader()
 

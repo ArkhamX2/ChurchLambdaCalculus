@@ -262,11 +262,29 @@ class Widget(QWidget,Ui_MainWindow):
             self.InputText.append("≡")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def TRUE(self):
-        self.InputText.append("True")
-        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        if len(self.InputText)==0:
+            self.InputText.append("True")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        else:
+            if self.IsLogical(self.InputText[len(self.InputText)-1])==True:
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
+            self.InputText.append("True")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def FALSE(self):
-        self.InputText.append("False")
-        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        if len(self.InputText)==0:
+            self.InputText.append("False")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        else:
+            if self.IsLogical(self.InputText[len(self.InputText)-1])==True:
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
+            self.InputText.append("False")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def ONE(self):
         self.InputText.append("1")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
@@ -516,10 +534,10 @@ class Widget(QWidget,Ui_MainWindow):
                             self.TRUE()
                         case QtCore.Qt.Key_Plus:
                             self.OR()
-                        case QtCore.Qt.Key_Minus:
-                            self.NOT()
                         case QtCore.Qt.Key_Asterisk:
                             self.AND()
+                        case QtCore.Qt.Key_Exclam:
+                            self.NOT()
                 match event.key():
                     case QtCore.Qt.Key_M:
                         self.LogcalcButton.click()
