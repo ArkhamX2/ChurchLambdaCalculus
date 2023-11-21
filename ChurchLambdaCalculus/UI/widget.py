@@ -118,6 +118,15 @@ class Widget(QWidget,Ui_MainWindow):
     def IsNumber(self, item):
         numbers="0123456789"
         return numbers.find(item)!=-1
+    
+    def IsLogical(self, item):
+        match item:
+            case "True":
+                return True
+            case "False":
+                return True
+            case _:
+                return False
 
     def MakeString(self):
         answ=""
@@ -197,20 +206,61 @@ class Widget(QWidget,Ui_MainWindow):
             self.InputText.append("^")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def OR(self):
-        self.InputText.append("V")
-        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        if len(self.InputText)==0:
+            self.InputText.append("True")
+            self.InputText.append("V")
+            self.Input.setText(self.Input.toPlainText() + "True" + self.InputText[len(self.InputText)-1])
+        else:
+            if self.IsLogical(self.InputText[len(self.InputText)-1])==False:
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
+            self.InputText.append("V")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+
     def AND(self):
-        self.InputText.append("^")
-        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        if len(self.InputText)==0:
+            self.InputText.append("True")
+            self.InputText.append("&")
+            self.Input.setText(self.Input.toPlainText() + "True" + self.InputText[len(self.InputText)-1])
+        else:
+            if self.IsLogical(self.InputText[len(self.InputText)-1])==False:
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
+            self.InputText.append("&")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def XOR(self):
-        self.InputText.append("⊕")
-        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        if len(self.InputText)==0:
+            self.InputText.append("True")
+            self.InputText.append("⊕")
+            self.Input.setText(self.Input.toPlainText() + "True" + self.InputText[len(self.InputText)-1])
+        else:
+            if self.IsLogical(self.InputText[len(self.InputText)-1])==False:
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
+            self.InputText.append("⊕")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def NOT(self):
         self.InputText.append("!")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def EQUALITY(self):
-        self.InputText.append("≡")
-        self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
+        if len(self.InputText)==0:
+            self.InputText.append("True")
+            self.InputText.append("≡")
+            self.Input.setText(self.Input.toPlainText() + "True" + self.InputText[len(self.InputText)-1])
+        else:
+            if self.IsLogical(self.InputText[len(self.InputText)-1])==False:
+                if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
+                    pass
+                else:
+                    self.DELETELAST()
+            self.InputText.append("≡")
+            self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def TRUE(self):
         self.InputText.append("True")
         self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
