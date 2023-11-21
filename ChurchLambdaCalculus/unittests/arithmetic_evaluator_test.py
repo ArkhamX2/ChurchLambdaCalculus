@@ -17,4 +17,4 @@ class Test(unittest.TestCase):
         pass
 
     def test_EvaluateEquation(self):
-        self.assertEqual(eval(EvaluateEquation(['5', '6', '10', '+', '3', '22', '65', '+', '*', '+', '16', '+', '+', '2', '+', '1', '+'])),301)
+        self.assertEqual(eval(EvaluateArithmeticEquation(['5', '6', '10', '+', '3', '22', '65', '+', '*', '+', '16', '+', '+', '2', '+', '1', '+'])),301)
