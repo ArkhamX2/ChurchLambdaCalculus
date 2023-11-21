@@ -128,9 +128,9 @@ class Widget(QWidget,Ui_MainWindow):
             case _:
                 return False
 
-    def MakeString(self):
+    def MakeString(self, input):
         answ=""
-        for item in self.InputText:
+        for item in input:
             if self.IsNumber(item)==True:
                 answ+=item
             else:
@@ -386,16 +386,17 @@ class Widget(QWidget,Ui_MainWindow):
                         return None                    
             return input
         
-    def NotSimplify(self):        
-        for i in range(len(self.InputText)-1):
+    def NotSimplify(self):
+        tmp=self.InputText        
+        for i in range(len(tmp)-1):
             try:
-                if self.InputText[i]=="!":
+                if tmp[i]=="!":
                     counter=0
                     try:
                         j=i+1
-                        while self.InputText[j]=="!":
+                        while tmp[j]=="!":
                             try:
-                                self.InputText.pop(j)
+                                tmp.pop(j)
                                 counter+=1
                                 j+=1
                             except:
@@ -403,11 +404,10 @@ class Widget(QWidget,Ui_MainWindow):
                     except:
                         pass
                     if (counter % 2 == 1):
-                        self.InputText.pop(i)
+                        tmp.pop(i)
             except:
                 pass
-        print(self.InputText)
-        pass
+        return tmp
 
     def CheckDivideZero(self, input):
         tmp=input
@@ -458,7 +458,7 @@ class Widget(QWidget,Ui_MainWindow):
         else:
             if self.logical==False:
                 self.NegativeNumbers()
-                input=self.CheckLastNotOperation(self.MakeString())
+                input=self.CheckLastNotOperation(self.MakeString(self.InputText))
                 if input!= None:
                     input=self.CheckOpenParen(input)
                     if input != None:
@@ -467,9 +467,8 @@ class Widget(QWidget,Ui_MainWindow):
                             self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
                 pass
             else:
-                pass
-                self.NotSimplify()
-                input=self.CheckLastNotOperation(self.MakeString())
+                pass                
+                input=self.CheckLastNotOperation(self.MakeString(self.NotSimplify()))
                 if input!= None:
                     input=self.CheckOpenParen(input)
                     if input != None:
@@ -524,8 +523,6 @@ class Widget(QWidget,Ui_MainWindow):
                 match event.key():
                     case QtCore.Qt.Key_M:
                         self.LogcalcButton.click()
-                    case QtCore.Qt.Key_Z:
-                        self.NotSimplify()
                     case QtCore.Qt.Key_ParenLeft:
                         self.PARENLEFT()
                     case QtCore.Qt.Key_ParenRight:
