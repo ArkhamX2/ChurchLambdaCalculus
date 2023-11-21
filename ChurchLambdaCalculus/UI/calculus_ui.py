@@ -294,10 +294,10 @@ class Ui_MainWindow(object):
         self.Result.setGeometry(QRect(10, 100, 451, 81))
         self.Result.setFont(font2)
         self.Result.setReadOnly(True)
-        MainWindow.CentralWidget=self.centralwidget
+        MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
-        MainWindow.StatusBar=self.statusbar
+        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
 
