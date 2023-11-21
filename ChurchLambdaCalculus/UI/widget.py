@@ -222,7 +222,7 @@ class Widget(QWidget,Ui_MainWindow):
     def AND(self):
         if len(self.InputText)==0:
             self.InputText.append("True")
-            self.InputText.append("&")
+            self.InputText.append("∧")
             self.Input.setText(self.Input.toPlainText() + "True" + self.InputText[len(self.InputText)-1])
         else:
             if self.IsLogical(self.InputText[len(self.InputText)-1])==False:
@@ -230,7 +230,7 @@ class Widget(QWidget,Ui_MainWindow):
                     pass
                 else:
                     self.DELETELAST()
-            self.InputText.append("&")
+            self.InputText.append("∧")
             self.Input.setText(self.Input.toPlainText() + self.InputText[len(self.InputText)-1])
     def XOR(self):
         if len(self.InputText)==0:
