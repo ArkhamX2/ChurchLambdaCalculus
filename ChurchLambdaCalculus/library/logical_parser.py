@@ -23,7 +23,7 @@ def Priority(c):
     match (c):
         case "!":
             return 4
-        case "^":
+        case "&":
             return 2
         case "V":
             return 1
@@ -35,7 +35,7 @@ def Priority(c):
             return 0
 
 def isOperator(c):
-    if (c=="!" or c== "^" or c=="V" or c=="⊕" or c=="≡"):
+    if (c=="!" or c== "&" or c=="V" or c=="⊕" or c=="≡"):
         return True
     else:
         return False
