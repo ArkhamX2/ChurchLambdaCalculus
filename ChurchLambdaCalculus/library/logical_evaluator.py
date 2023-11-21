@@ -8,7 +8,7 @@ def EvaluateLogicalEquation(tokensInp):
                 operations.pop()
                 operations.append("NOT(" + str(operations.pop()) + ")")
                 pass
-            case "^":
+            case "&":
                 operations.pop()
                 operations.append("AND(" + str(operations.pop()) + ")(" + str(operations.pop()) + ")")
                 pass
