@@ -28,6 +28,7 @@ class Widget(QWidget,Ui_MainWindow):
         self.Minus.clicked.connect(self.minus)
         self.Mult.clicked.connect(self.multiply)
         self.Div.clicked.connect(self.divide)
+        self.PowTo.clicked.connect(self.POWER)
         self.PlusLog.clicked.connect(self.OR)
         self.MultLog.clicked.connect(self.AND)
         self.NotLog.clicked.connect(self.NOT)
@@ -49,6 +50,8 @@ class Widget(QWidget,Ui_MainWindow):
         self.DeleteButton.clicked.connect(self.DELETELAST)        
         self.Evaluate.clicked.connect(self.EVALUATE)
         self.LogcalcButton.clicked.connect(self.LOGCALC)
+        self.ParenLeftButton.clicked.connect(self.PARENLEFT)
+        self.parenRightButton.clicked.connect(self.PARENRIGHT)
 
     def UiEnableSwitch(self):
         if self.logical==False:
@@ -56,6 +59,7 @@ class Widget(QWidget,Ui_MainWindow):
             self.Minus.setEnabled(True)
             self.Mult.setEnabled(True)
             self.Div.setEnabled(True)
+            self.PowTo.setEnabled(True)
             self.One.setEnabled(True)
             self.Two.setEnabled(True)
             self.Three.setEnabled(True)
@@ -79,6 +83,7 @@ class Widget(QWidget,Ui_MainWindow):
             self.Minus.setEnabled(False)
             self.Mult.setEnabled(False)
             self.Div.setEnabled(False)
+            self.PowTo.setEnabled(False)
             self.One.setEnabled(False)
             self.Two.setEnabled(False)
             self.Three.setEnabled(False)

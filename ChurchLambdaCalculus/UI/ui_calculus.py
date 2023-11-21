@@ -24,9 +24,9 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(440, 530)
-        MainWindow.setMinimumSize(QSize(440, 530))
-        MainWindow.setMaximumSize(QSize(440, 530))
+        MainWindow.resize(440, 540)
+        MainWindow.setMinimumSize(QSize(440, 540))
+        MainWindow.setMaximumSize(QSize(440, 540))
         font = QFont()
         font.setPointSize(11)
         MainWindow.setFont(font)
@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
         self.Input.setReadOnly(True)
         self.gridLayoutWidget = QWidget(self.centralwidget)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(10, 310, 421, 181))
+        self.gridLayoutWidget.setGeometry(QRect(10, 310, 421, 211))
         self.gridLayout = QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setSpacing(5)
         self.gridLayout.setObjectName(u"gridLayout")
@@ -63,21 +63,6 @@ class Ui_MainWindow(object):
         self.Four.setObjectName(u"Four")
 
         self.gridLayout.addWidget(self.Four, 2, 0, 1, 1)
-
-        self.Mult = QPushButton(self.gridLayoutWidget)
-        self.Mult.setObjectName(u"Mult")
-
-        self.gridLayout.addWidget(self.Mult, 1, 3, 1, 1)
-
-        self.Minus = QPushButton(self.gridLayoutWidget)
-        self.Minus.setObjectName(u"Minus")
-
-        self.gridLayout.addWidget(self.Minus, 3, 3, 1, 1)
-
-        self.Plus = QPushButton(self.gridLayoutWidget)
-        self.Plus.setObjectName(u"Plus")
-
-        self.gridLayout.addWidget(self.Plus, 2, 3, 1, 1)
 
         self.Eight = QPushButton(self.gridLayoutWidget)
         self.Eight.setObjectName(u"Eight")
@@ -119,38 +104,68 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.DeleteButton, 0, 1, 1, 1)
 
-        self.Evaluate = QPushButton(self.gridLayoutWidget)
-        self.Evaluate.setObjectName(u"Evaluate")
-
-        self.gridLayout.addWidget(self.Evaluate, 0, 2, 1, 1)
-
-        self.Div = QPushButton(self.gridLayoutWidget)
-        self.Div.setObjectName(u"Div")
-
-        self.gridLayout.addWidget(self.Div, 0, 3, 1, 1)
-
         self.Zer0 = QPushButton(self.gridLayoutWidget)
         self.Zer0.setObjectName(u"Zer0")
 
         self.gridLayout.addWidget(self.Zer0, 4, 0, 1, 1)
 
-        self.TrueButton = QPushButton(self.gridLayoutWidget)
-        self.TrueButton.setObjectName(u"TrueButton")
+        self.Minus = QPushButton(self.gridLayoutWidget)
+        self.Minus.setObjectName(u"Minus")
 
-        self.gridLayout.addWidget(self.TrueButton, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.Minus, 3, 3, 1, 1)
 
-        self.FalseButton = QPushButton(self.gridLayoutWidget)
-        self.FalseButton.setObjectName(u"FalseButton")
+        self.Plus = QPushButton(self.gridLayoutWidget)
+        self.Plus.setObjectName(u"Plus")
 
-        self.gridLayout.addWidget(self.FalseButton, 4, 2, 1, 1)
+        self.gridLayout.addWidget(self.Plus, 4, 3, 1, 1)
+
+        self.Mult = QPushButton(self.gridLayoutWidget)
+        self.Mult.setObjectName(u"Mult")
+
+        self.gridLayout.addWidget(self.Mult, 2, 3, 1, 1)
+
+        self.Div = QPushButton(self.gridLayoutWidget)
+        self.Div.setObjectName(u"Div")
+
+        self.gridLayout.addWidget(self.Div, 1, 3, 1, 1)
+
+        self.ParenLeftButton = QPushButton(self.gridLayoutWidget)
+        self.ParenLeftButton.setObjectName(u"ParenLeftButton")
+
+        self.gridLayout.addWidget(self.ParenLeftButton, 4, 1, 1, 1)
+
+        self.parenRightButton = QPushButton(self.gridLayoutWidget)
+        self.parenRightButton.setObjectName(u"parenRightButton")
+
+        self.gridLayout.addWidget(self.parenRightButton, 4, 2, 1, 1)
+
+        self.Evaluate = QPushButton(self.gridLayoutWidget)
+        self.Evaluate.setObjectName(u"Evaluate")
+
+        self.gridLayout.addWidget(self.Evaluate, 0, 2, 1, 1)
+
+        self.PowTo = QPushButton(self.gridLayoutWidget)
+        self.PowTo.setObjectName(u"PowTo")
+
+        self.gridLayout.addWidget(self.PowTo, 0, 3, 1, 1)
 
         self.gridLayoutWidget_2 = QWidget(self.centralwidget)
         self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
-        self.gridLayoutWidget_2.setGeometry(QRect(10, 190, 421, 125))
+        self.gridLayoutWidget_2.setGeometry(QRect(10, 190, 421, 121))
         self.gridLayout_2 = QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_2.setSpacing(5)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.EqLog = QPushButton(self.gridLayoutWidget_2)
+        self.EqLog.setObjectName(u"EqLog")
+
+        self.gridLayout_2.addWidget(self.EqLog, 4, 3, 1, 1)
+
+        self.FalseButton = QPushButton(self.gridLayoutWidget_2)
+        self.FalseButton.setObjectName(u"FalseButton")
+
+        self.gridLayout_2.addWidget(self.FalseButton, 8, 2, 1, 1)
+
         self.NotLog = QPushButton(self.gridLayoutWidget_2)
         self.NotLog.setObjectName(u"NotLog")
 
@@ -160,6 +175,13 @@ class Ui_MainWindow(object):
         self.PlusLog.setObjectName(u"PlusLog")
 
         self.gridLayout_2.addWidget(self.PlusLog, 4, 0, 1, 1)
+
+        self.XorLog = QPushButton(self.gridLayoutWidget_2)
+        self.XorLog.setObjectName(u"XorLog")
+        self.XorLog.setFont(font)
+        self.XorLog.setIconSize(QSize(16, 16))
+
+        self.gridLayout_2.addWidget(self.XorLog, 8, 0, 1, 1)
 
         self.LogcalcButton = QRadioButton(self.gridLayoutWidget_2)
         self.LogcalcButton.setObjectName(u"LogcalcButton")
@@ -176,17 +198,10 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.MultLog, 4, 1, 1, 1)
 
-        self.EqLog = QPushButton(self.gridLayoutWidget_2)
-        self.EqLog.setObjectName(u"EqLog")
+        self.TrueButton = QPushButton(self.gridLayoutWidget_2)
+        self.TrueButton.setObjectName(u"TrueButton")
 
-        self.gridLayout_2.addWidget(self.EqLog, 8, 0, 1, 1)
-
-        self.XorLog = QPushButton(self.gridLayoutWidget_2)
-        self.XorLog.setObjectName(u"XorLog")
-        self.XorLog.setFont(font)
-        self.XorLog.setIconSize(QSize(16, 16))
-
-        self.gridLayout_2.addWidget(self.XorLog, 8, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.TrueButton, 8, 1, 1, 1)
 
         self.Result = QTextEdit(self.centralwidget)
         self.Result.setObjectName(u"Result")
@@ -196,7 +211,7 @@ class Ui_MainWindow(object):
         MainWindow.CentralWidget=self.centralwidget
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
-        MainWindow.StatusBar=self.statusbar
+        MainWindow.StatusBar = self.statusbar
 
         self.retranslateUi(MainWindow)
 
@@ -208,9 +223,6 @@ class Ui_MainWindow(object):
         self.Two.setText(QCoreApplication.translate("MainWindow", u"2", None))
         self.Nine.setText(QCoreApplication.translate("MainWindow", u"9", None))
         self.Four.setText(QCoreApplication.translate("MainWindow", u"4", None))
-        self.Mult.setText(QCoreApplication.translate("MainWindow", u"*", None))
-        self.Minus.setText(QCoreApplication.translate("MainWindow", u"-", None))
-        self.Plus.setText(QCoreApplication.translate("MainWindow", u"+", None))
         self.Eight.setText(QCoreApplication.translate("MainWindow", u"8", None))
         self.Six.setText(QCoreApplication.translate("MainWindow", u"6", None))
         self.Five.setText(QCoreApplication.translate("MainWindow", u"5", None))
@@ -219,16 +231,22 @@ class Ui_MainWindow(object):
         self.Seven.setText(QCoreApplication.translate("MainWindow", u"7", None))
         self.ClearButton.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0447\u0438\u0441\u0442\u0438\u0442\u044c \u043f\u043e\u043b\u0435", None))
         self.DeleteButton.setText(QCoreApplication.translate("MainWindow", u"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0441\u0438\u043c\u0432\u043e\u043b", None))
-        self.Evaluate.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0447\u0438\u0441\u043b\u0438\u0442\u044c", None))
-        self.Div.setText(QCoreApplication.translate("MainWindow", u"/", None))
         self.Zer0.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.TrueButton.setText(QCoreApplication.translate("MainWindow", u"True", None))
+        self.Minus.setText(QCoreApplication.translate("MainWindow", u"-", None))
+        self.Plus.setText(QCoreApplication.translate("MainWindow", u"+", None))
+        self.Mult.setText(QCoreApplication.translate("MainWindow", u"*", None))
+        self.Div.setText(QCoreApplication.translate("MainWindow", u"/", None))
+        self.ParenLeftButton.setText(QCoreApplication.translate("MainWindow", u"(", None))
+        self.parenRightButton.setText(QCoreApplication.translate("MainWindow", u")", None))
+        self.Evaluate.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0447\u0438\u0441\u043b\u0438\u0442\u044c", None))
+        self.PowTo.setText(QCoreApplication.translate("MainWindow", u"^x", None))
+        self.EqLog.setText(QCoreApplication.translate("MainWindow", u"\u2261", None))
         self.FalseButton.setText(QCoreApplication.translate("MainWindow", u"False", None))
         self.NotLog.setText(QCoreApplication.translate("MainWindow", u"!", None))
         self.PlusLog.setText(QCoreApplication.translate("MainWindow", u"+", None))
+        self.XorLog.setText(QCoreApplication.translate("MainWindow", u"\u2295", None))
         self.LogcalcButton.setText(QCoreApplication.translate("MainWindow", u"\u041b\u043e\u0433\u0438\u0447\u0435\u0441\u043a\u0438\u0439 \u043a\u0430\u043b\u044c\u043a\u0443\u043b\u044f\u0442\u043e\u0440", None))
         self.MultLog.setText(QCoreApplication.translate("MainWindow", u"*", None))
-        self.EqLog.setText(QCoreApplication.translate("MainWindow", u"\u2261", None))
-        self.XorLog.setText(QCoreApplication.translate("MainWindow", u"\u2295", None))
+        self.TrueButton.setText(QCoreApplication.translate("MainWindow", u"True", None))
     # retranslateUi
 

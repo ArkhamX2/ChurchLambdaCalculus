@@ -10,19 +10,19 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>530</height>
+    <height>540</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>440</width>
-    <height>530</height>
+    <height>540</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>440</width>
-    <height>530</height>
+    <height>540</height>
    </size>
   </property>
   <property name="font">
@@ -67,7 +67,7 @@
       <x>10</x>
       <y>310</y>
       <width>421</width>
-      <height>181</height>
+      <height>211</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -92,27 +92,6 @@
       <widget class="QPushButton" name="Four">
        <property name="text">
         <string>4</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QPushButton" name="Mult">
-       <property name="text">
-        <string>*</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="3">
-      <widget class="QPushButton" name="Minus">
-       <property name="text">
-        <string>-</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QPushButton" name="Plus">
-       <property name="text">
-        <string>+</string>
        </property>
       </widget>
      </item>
@@ -172,6 +151,55 @@
        </property>
       </widget>
      </item>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="Zer0">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QPushButton" name="Minus">
+       <property name="text">
+        <string>-</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QPushButton" name="Plus">
+       <property name="text">
+        <string>+</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QPushButton" name="Mult">
+       <property name="text">
+        <string>*</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QPushButton" name="Div">
+       <property name="text">
+        <string>/</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="ParenLeftButton">
+       <property name="text">
+        <string>(</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="2">
+      <widget class="QPushButton" name="parenRightButton">
+       <property name="text">
+        <string>)</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="2">
       <widget class="QPushButton" name="Evaluate">
        <property name="text">
@@ -180,30 +208,9 @@
       </widget>
      </item>
      <item row="0" column="3">
-      <widget class="QPushButton" name="Div">
+      <widget class="QPushButton" name="PowTo">
        <property name="text">
-        <string>/</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QPushButton" name="Zer0">
-       <property name="text">
-        <string>0</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QPushButton" name="TrueButton">
-       <property name="text">
-        <string>True</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QPushButton" name="FalseButton">
-       <property name="text">
-        <string>False</string>
+        <string>^x</string>
        </property>
       </widget>
      </item>
@@ -215,13 +222,27 @@
       <x>10</x>
       <y>190</y>
       <width>421</width>
-      <height>125</height>
+      <height>121</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
      <property name="spacing">
       <number>5</number>
      </property>
+     <item row="4" column="3">
+      <widget class="QPushButton" name="EqLog">
+       <property name="text">
+        <string>≡</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="2">
+      <widget class="QPushButton" name="FalseButton">
+       <property name="text">
+        <string>False</string>
+       </property>
+      </widget>
+     </item>
      <item row="4" column="2">
       <widget class="QPushButton" name="NotLog">
        <property name="text">
@@ -233,6 +254,24 @@
       <widget class="QPushButton" name="PlusLog">
        <property name="text">
         <string>+</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QPushButton" name="XorLog">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>⊕</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -256,28 +295,10 @@
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
-      <widget class="QPushButton" name="EqLog">
-       <property name="text">
-        <string>≡</string>
-       </property>
-      </widget>
-     </item>
      <item row="8" column="1">
-      <widget class="QPushButton" name="XorLog">
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-        </font>
-       </property>
+      <widget class="QPushButton" name="TrueButton">
        <property name="text">
-        <string>⊕</string>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
+        <string>True</string>
        </property>
       </widget>
      </item>
