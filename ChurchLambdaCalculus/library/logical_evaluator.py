@@ -22,7 +22,7 @@ def EvaluateLogicalEquation(tokensInp):
                 pass 
             case "≡":
                 operations.pop()
-                operations.append("IS_EQUAL(" + str(operations.pop()) + ")(" + str(operations.pop()) + ")")
+                operations.append("XNOR(" + str(operations.pop()) + ")(" + str(operations.pop()) + ")")
                 pass       
             case _:
                 operations.append("decodeBoolean("+str(operations.pop())+")")
