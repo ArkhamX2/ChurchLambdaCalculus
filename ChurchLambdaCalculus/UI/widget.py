@@ -416,7 +416,7 @@ class Widget(QWidget,Ui_MainWindow):
         return input
         
     def NotSimplify(self):
-        tmp=self.InputText        
+        tmp=self.InputText.copy()       
         for i in range(len(tmp)-1):
             try:
                 if tmp[i]=="¬":
