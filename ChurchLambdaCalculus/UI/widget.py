@@ -185,7 +185,7 @@ class Widget(QWidget,Ui_MainWindow):
             self.InputText.append("/")
             self.Input.setText(self.Input.toPlainText() + "0" + self.InputText[len(self.InputText)-1])
         else:
-            if self.IsNumber(self.InputText[len(self.InputText)-1])==False and (self.InputText[len(self.InputText)-2]!="(" or self.InputText[len(self.InputText)-2]!=")"):
+            if self.IsNumber(self.InputText[len(self.InputText)-1])==False and (self.InputText[len(self.InputText)-1]!="(" or self.InputText[len(self.InputText)-1]!=")"):
                 if self.InputText[len(self.InputText)-1]=="(" or self.InputText[len(self.InputText)-1]==")":
                     pass
                 else:
