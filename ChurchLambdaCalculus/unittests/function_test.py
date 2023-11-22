@@ -98,3 +98,6 @@ class Test(unittest.TestCase):
 
     def test_SIGNED_DIVIDE(self):
         self.assertEqual(encodeSigned(SIGNED_DIVIDE(decodeSigned(-10))(decodeSigned(-5))),2) 
+
+    def test_SIGNED_POWER(self):
+        self.assertEqual(encodeSigned(SIGNED_POWER(decodeSigned(-5))(decodeSigned(3))),-125) 
