@@ -404,6 +404,17 @@ class Widget(QWidget,Ui_MainWindow):
                         return None                    
             return input
         
+    def CheckPowerNegative(self, input):
+        for i in range(len(input)-1):
+            if input[i]=="^":
+                try:
+                    if int(input[i+2])<0:
+                        self.Result.setText("Возведение числа в отрицательную степень")
+                        return None
+                except:
+                    pass
+        return input
+        
     def NotSimplify(self):
         tmp=self.InputText        
         for i in range(len(tmp)-1):
@@ -476,13 +487,15 @@ class Widget(QWidget,Ui_MainWindow):
         else:
             if self.logical==False:
                 self.NegativeNumbers()
-                input=self.CheckLastNotOperation(self.MakeString(self.InputText))
+                input=self.CheckPowerNegative(self.InputText)
                 if input!= None:
-                    input=self.CheckOpenParen(input)
-                    if input != None:
-                        input=self.CheckDivideZero(input)
+                    input=self.CheckLastNotOperation(self.MakeString(input))
+                    if input!= None:                    
+                        input=self.CheckOpenParen(input)
                         if input != None:
-                            self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
+                            input=self.CheckDivideZero(input)
+                            if input != None:
+                                self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
                 pass
             else:
                 pass                
