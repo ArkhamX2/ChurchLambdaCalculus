@@ -437,6 +437,21 @@ class Widget(QWidget,Ui_MainWindow):
             except:
                 pass
         return tmp
+    
+    def NumberNotStartWithZero(self, input):
+        if (len(input)>1):
+            if input[0]=="0" and self.IsNumber(input[1])==True:
+                self.Result.setText("Число не может начинатся с 0")
+                return None
+        for i in range(len(input)-1):
+            if self.IsNumber(input[i])==False:
+                try:
+                    if input[i+1]=="0" and self.IsNumber(input[i+2])==True:
+                        self.Result.setText("Число не может начинатся с 0")
+                        return None
+                except:
+                    pass
+        return input
 
     def CheckDivideZero(self, input):
         tmp=input
@@ -489,13 +504,15 @@ class Widget(QWidget,Ui_MainWindow):
                 self.NegativeNumbers()
                 input=self.CheckPowerNegative(self.InputText)
                 if input!= None:
-                    input=self.CheckLastNotOperation(self.MakeString(input))
-                    if input!= None:                    
-                        input=self.CheckOpenParen(input)
-                        if input != None:
-                            input=self.CheckDivideZero(input)
+                    input=self.NumberNotStartWithZero(input)
+                    if input!= None: 
+                        input=self.CheckLastNotOperation(self.MakeString(input))
+                        if input!= None:                    
+                            input=self.CheckOpenParen(input)
                             if input != None:
-                                self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
+                                input=self.CheckDivideZero(input)
+                                if input != None:
+                                    self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
                 pass
             else:
                 pass                
