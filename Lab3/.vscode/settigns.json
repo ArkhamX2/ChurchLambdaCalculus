@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./Lab3/library",
+        "./library"
+    ]
+}
