@@ -1,0 +1,20 @@
+Sorted 1000000 elements in 1.3242747999993298 seconds
+
+Sorted 2000000 elements in 2.400109500000326 seconds
+
+Sorted 9000000 elements in 10.745485600000393 seconds
+
+Sorted 3000000 elements in 3.6681334000004426 seconds
+
+Sorted 10000000 elements in 11.694684000000052 seconds
+
+Sorted 11000000 elements in 12.239120399999592 seconds
+
+Sorted 12000000 elements in 13.39253380000082 seconds
+
+Sorted 13000000 elements in 14.568324199999552 seconds
+
+Sorted 14000000 elements in 15.629680300000473 seconds
+
+Sorted 15000000 elements in 16.676892999999836 seconds
+
