@@ -81,7 +81,6 @@ class Ui_MainWindow(object):
 
         self.SpinBoxH = QDoubleSpinBox(self.gridLayoutWidget)
         self.SpinBoxH.setObjectName(u"SpinBoxH")
-        self.SpinBoxH.setMinimum((-1)*2**26)
 
         self.gridLayout.addWidget(self.SpinBoxH, 2, 1, 1, 1)
 

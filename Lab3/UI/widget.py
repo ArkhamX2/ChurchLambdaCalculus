@@ -30,6 +30,7 @@ class Widget(QWidget,Ui_MainWindow):
             self.msgbox = QMessageBox(self)
             self.msgbox.setWindowTitle("Error")
             self.msgbox.setText(check)
+            self.msgbox.show()
     
         
     def HandleOutputWidget(self,inputParameters:list[float],functionResult:list[float]):
