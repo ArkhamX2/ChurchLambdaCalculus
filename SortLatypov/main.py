@@ -41,7 +41,7 @@ try:
         writeResultToFile('result.txt',end-start, answer,False, 'a')
 except:
     end = time.perf_counter()
-    print("Файл содержит недопустимые символы")
+    print("Файл содержит недопустимые символы!")
     writeResultToFile('result.txt', 0, [])
 
 
