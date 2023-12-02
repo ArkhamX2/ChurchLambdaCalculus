@@ -4,25 +4,34 @@ import tkinter
 import numpy as np
 from tkinter import PhotoImage
 
-def button_click():
+def work():
     a = float(Entry_a.get())
     b = float(Entry_b.get())
     h = float(Entry_h.get())
     res = []
-    for x in np.arange(a,b,h):
+    for x in np.arange(a,b+h,h):
         res.append(x**4 + x*2 + x + 1)
     counter = 1
+    meow = []
     for i in np.arange(a,b+h,h):
-        TreeViewMeow.insert(counter, "meow", i=i)
+        meow.append(str(counter))
+        meow.append(str(round(i,2)).rstrip('0').rstrip('.'))
+        meow.append(str(round(res[counter-1],4)).rstrip('0').rstrip('.'))
         counter +=1
-    meow =[(1,1,1),(2,2,2),(2,1,3)]
-    for x in meow:
-        TreeViewMeow.insert("", END, values=x)
-    TreeViewMeow.update_idletasks()    
+    #meow = np.array_split(meow,counter-1)
+    #meow = np.reshape(meow, (counter-1, 3))
+    chunk_size = 3
+    meow = [meow[i:i + chunk_size] for i in range(0, len(meow), chunk_size)]
+    #print(meow)
+    return meow
+
+def button_click():
+    for i in work():
+        TreeViewMeow.insert('', END, values=i)    
     
 
 window = Tk()
-window.title("meow")
+window.title("Таблица значений функции в диапазоне")
 window.geometry('700x600')
 
 photo = tkinter.PhotoImage(file="Screenshot_3.png")
@@ -33,7 +42,7 @@ LabelFrameMeow = tkinter.LabelFrame(window,text="Параметры задачи
 LabelFrameMeow.place(x = 340,y = 19,width = 338,height = 259)
 LabelFrameMeow.configure(relief = "groove")
 
-ButtonMeow = tkinter.Button(window,text="Вычислить!",width = 10,height = 4, comman=button_click)
+ButtonMeow = tkinter.Button(window,text="Вычислить!",width = 10,height = 4, command=button_click)
 ButtonMeow.place(x = 10,y = 169,width = 320,height = 107)
 
 Label_a = tkinter.Label(LabelFrameMeow,text="Начало диапазона(а)",width = 10,height = 4)
@@ -57,23 +66,24 @@ Label_F.configure(anchor = "w")
 Label_F.configure(relief = "flat")
 
 Entry_a = tkinter.Entry(LabelFrameMeow)
-Entry_a.place(x = 157,y = 74,width = 120,height = 20)
+Entry_a.place(x = 157,y = 35,width = 120,height = 20)
 Entry_a.configure(relief = "sunken")
 
 Entry_b = tkinter.Entry(LabelFrameMeow)
-Entry_b.place(x = 157,y = 113,width = 120,height = 20)
+Entry_b.place(x = 157,y = 74,width = 120,height = 20)
 Entry_b.configure(relief = "sunken")
 
 Entry_h = tkinter.Entry(LabelFrameMeow)
-Entry_h.place(x = 157,y = 35,width = 120,height = 20)
+Entry_h.place(x = 157,y = 113,width = 120,height = 20)
 Entry_h.configure(relief = "sunken")
 
 columns = ("#1", "#2", "#3")
 TreeViewMeow = tkinter.ttk.Treeview(window,show="headings",columns=columns)
 TreeViewMeow.place(x = 10,y = 300,width = 669,height = 280)
 TreeViewMeow.configure(selectmode = "extended")
-ysb = tkinter.ttk.Scrollbar(TreeViewMeow, orient=tkinter.HORIZONTAL, command=TreeViewMeow.yview)
-TreeViewMeow.configure(yscroll=ysb.set)
+xsb = tkinter.ttk.Scrollbar(TreeViewMeow, orient=tkinter.HORIZONTAL, command=TreeViewMeow.xview)
+TreeViewMeow.configure(xscroll=xsb.set)
+
 TreeViewMeow.heading("#1", text="№")
 TreeViewMeow.heading("#2", text="X")
 TreeViewMeow.heading("#3", text="f(X)")
