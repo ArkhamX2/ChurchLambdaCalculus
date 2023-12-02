@@ -15,10 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QDoubleSpinBox, QGridLayout,
-    QHeaderView, QLabel, QMainWindow, QPushButton,
-    QSizePolicy, QStatusBar, QTableWidget, QTableWidgetItem,
-    QTextEdit, QWidget)
+from PySide6.QtWidgets import (QApplication, QDoubleSpinBox, QGridLayout, QHeaderView,
+    QLabel, QMainWindow, QPushButton, QSizePolicy,
+    QStatusBar, QTableWidget, QTableWidgetItem, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -29,14 +28,6 @@ class Ui_MainWindow(object):
         MainWindow.setMaximumSize(QSize(600, 490))
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.Result = QTextEdit(self.centralwidget)
-        self.Result.setObjectName(u"Result")
-        self.Result.setGeometry(QRect(10, 10, 231, 111))
-        font = QFont()
-        font.setPointSize(12)
-        self.Result.setFont(font)
-        self.Result.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
-        self.Result.setReadOnly(True)
         self.Calculate = QPushButton(self.centralwidget)
         self.Calculate.setObjectName(u"Calculate")
         self.Calculate.setGeometry(QRect(10, 130, 231, 41))
@@ -78,26 +69,31 @@ class Ui_MainWindow(object):
 
         self.SpinBoxA = QDoubleSpinBox(self.gridLayoutWidget)
         self.SpinBoxA.setObjectName(u"SpinBoxA")
+        self.SpinBoxA.setMinimum((-1)*2**26)
 
         self.gridLayout.addWidget(self.SpinBoxA, 0, 1, 1, 1)
 
         self.SpinBoxB = QDoubleSpinBox(self.gridLayoutWidget)
         self.SpinBoxB.setObjectName(u"SpinBoxB")
+        self.SpinBoxB.setMinimum((-1)*2**26)
 
         self.gridLayout.addWidget(self.SpinBoxB, 1, 1, 1, 1)
 
         self.SpinBoxH = QDoubleSpinBox(self.gridLayoutWidget)
         self.SpinBoxH.setObjectName(u"SpinBoxH")
+        self.SpinBoxH.setMinimum((-1)*2**26)
 
         self.gridLayout.addWidget(self.SpinBoxH, 2, 1, 1, 1)
 
         self.SpinBoxK = QDoubleSpinBox(self.gridLayoutWidget)
         self.SpinBoxK.setObjectName(u"SpinBoxK")
+        self.SpinBoxK.setMinimum((-1)*2**26)
 
         self.gridLayout.addWidget(self.SpinBoxK, 3, 1, 1, 1)
 
         self.SpinBoxM = QDoubleSpinBox(self.gridLayoutWidget)
         self.SpinBoxM.setObjectName(u"SpinBoxM")
+        self.SpinBoxK.setMinimum((-1)*2**26)
 
         self.gridLayout.addWidget(self.SpinBoxM, 4, 1, 1, 1)
 
@@ -105,17 +101,26 @@ class Ui_MainWindow(object):
         self.tableWidget.setObjectName(u"tableWidget")
         self.tableWidget.setGeometry(QRect(10, 180, 571, 281))
         self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.label_7 = QLabel(self.centralwidget)
+        self.gridLayoutWidget_2 = QWidget(self.centralwidget)
+        self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
+        self.gridLayoutWidget_2.setGeometry(QRect(10, 10, 231, 111))
+        self.gridLayout_2 = QGridLayout(self.gridLayoutWidget_2)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.label_7 = QLabel(self.gridLayoutWidget_2)
         self.label_7.setObjectName(u"label_7")
-        self.label_7.setGeometry(QRect(20, 40, 211, 61))
-        self.label_7.setAutoFillBackground(False)
-        self.label_7.setPixmap(QPixmap(u"FunctionPic.jpg"))
+        self.label_7.setMinimumSize(QSize(200, 50))
+        self.label_7.setAutoFillBackground(True)
+        self.label_7.setPixmap(QPixmap(u"./UI/FunctionPic.jpg"))
         self.label_7.setScaledContents(True)
         self.label_7.setAlignment(Qt.AlignCenter)
-        MainWindow.centralWidget = self.centralwidget
+
+        self.gridLayout_2.addWidget(self.label_7, 0, 0, 1, 1)
+
+        MainWindow.centralWidget=self.centralwidget
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
-        MainWindow.statusBar = self.statusbar
+        MainWindow.statusBar=self.statusbar
 
         self.retranslateUi(MainWindow)
 

@@ -32,15 +32,20 @@ class Widget(QWidget,Ui_MainWindow):
             self.msgbox.setText(check)
     
         
-    def HandleOutputWidget(inputParameters:[float],functionResult:[float],self):
+    def HandleOutputWidget(self,inputParameters:list[float],functionResult:list[float]):
+
+        self.tableWidget.clear()
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setHorizontalHeaderItem(0,QTableWidgetItem("N"))
+        self.tableWidget.setHorizontalHeaderItem(1,QTableWidgetItem("X"))
+        self.tableWidget.setHorizontalHeaderItem(2,QTableWidgetItem("f(x)"))
+
         leftBorder = inputParameters[0]
         rightBorder = inputParameters[1]
         step = inputParameters[2]
-
+        counter = 1
         for i in np.arange(leftBorder,rightBorder+step,step):
-            
-            currentRowCount = self.tableWidget.rowCount() #necessary even when there are no rows in the table
-            #self.tableWidget.insertRow(currentRowCount, 0, QTableWidgetItem(str(counter)))
             self.add_row(counter,i,functionResult[counter-1])
             counter += 1
             
@@ -49,6 +54,6 @@ class Widget(QWidget,Ui_MainWindow):
         rowPosition = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowPosition)      
         self.tableWidget.setRowCount(rowPosition+1)          
-        self.tableWidget.setItem(rowPosition,0,QTableWidgetItem(counter))
-        self.tableWidget.setItem(rowPosition,1,QTableWidgetItem(xValue))
-        self.tableWidget.setItem(rowPosition,2,QTableWidgetItem(functionResult))
+        self.tableWidget.setItem(rowPosition,0,QTableWidgetItem(str(counter)))
+        self.tableWidget.setItem(rowPosition,1,QTableWidgetItem(str(xValue)))
+        self.tableWidget.setItem(rowPosition,2,QTableWidgetItem(str(functionResult)))
