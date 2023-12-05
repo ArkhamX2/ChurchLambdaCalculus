@@ -430,7 +430,6 @@ class Widget(QWidget,Ui_MainWindow):
                             try:
                                 tmp.pop(j)
                                 counter+=1
-                                j+=1
                             except:
                                 break
                     except:
