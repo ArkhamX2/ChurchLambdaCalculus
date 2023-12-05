@@ -10,19 +10,19 @@
     <x>0</x>
     <y>0</y>
     <width>476</width>
-    <height>545</height>
+    <height>640</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>476</width>
-    <height>545</height>
+    <height>640</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>476</width>
-    <height>545</height>
+    <height>640</height>
    </size>
   </property>
   <property name="font">
@@ -744,6 +744,16 @@
     </property>
     <property name="readOnly">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="Log">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>530</y>
+      <width>451</width>
+      <height>81</height>
+     </rect>
     </property>
    </widget>
   </widget>
