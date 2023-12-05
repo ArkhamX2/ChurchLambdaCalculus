@@ -108,10 +108,12 @@ class Widget(QWidget,Ui_MainWindow):
             self.logical=False
             self.CLEARALL()
             self.Result.setText("")
+            self.Result.setText("")
             self.UiEnableSwitch()            
         else:
             self.logical=True
             self.CLEARALL()
+            self.Result.setText("")
             self.Result.setText("")
             self.UiEnableSwitch()            
 
@@ -346,6 +348,7 @@ class Widget(QWidget,Ui_MainWindow):
     def CLEARALL(self):
         self.InputText.clear()
         self.Input.setText("")
+        self.Result.setText("")
     def DELETELAST(self):
         try:        
             self.Input.setText(self.Input.toPlainText()[:len(self.Input.toPlainText())-len(self.InputText.pop())])
@@ -499,6 +502,7 @@ class Widget(QWidget,Ui_MainWindow):
     def EVALUATE(self):
         if len(self.InputText)==0:
             self.Result.setText("")
+            self.Result.setText("")
         else:
             if self.logical==False:
                 self.NegativeNumbers()
@@ -512,7 +516,9 @@ class Widget(QWidget,Ui_MainWindow):
                             if input != None:
                                 input=self.CheckDivideZero(input)
                                 if input != None:
-                                    self.Result.setText(str(eval(EvaluateArithmeticEquation(ArithmeticParse(input)))))
+                                    church=EvaluateArithmeticEquation(ArithmeticParse(input))
+                                    self.Log.setText(church)
+                                    self.Result.setText(str(eval(church)))
                 pass
             else:
                 pass                
@@ -520,7 +526,9 @@ class Widget(QWidget,Ui_MainWindow):
                 if input!= None:
                     input=self.CheckOpenParen(input)
                     if input != None:
-                        self.Result.setText(str(eval(EvaluateLogicalEquation(LogicalParse(input)))))
+                        church=EvaluateLogicalEquation(LogicalParse(input))
+                        self.Log.setText(church)
+                        self.Result.setText(str(eval(church)))
 
     def keyPressEvent(self, event):
         if (event.type() == QtCore.QEvent.KeyPress):
