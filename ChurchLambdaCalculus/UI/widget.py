@@ -349,6 +349,7 @@ class Widget(QWidget,Ui_MainWindow):
         self.InputText.clear()
         self.Input.setText("")
         self.Result.setText("")
+        self.Log.setText("")
     def DELETELAST(self):
         try:        
             self.Input.setText(self.Input.toPlainText()[:len(self.Input.toPlainText())-len(self.InputText.pop())])
